@@ -9,6 +9,10 @@
 %
 % SPDX-FileCopyrightText: 2026 Frank Langbein <frank@langbein.org>
 % SPDX-License-Identifier: LPPL-1.3c
+% SPDX-FileContributor: Modified by Drewan RUtherford <RutherfordD@cardiff.ac.uk>
+%   Changes:
+%       - Removed the comman in citations
+%
 % This file may be distributed and/or modified under the terms of the
 % LaTeX Project Public License (LPPL), version 1.3c.
 % The latest version of this license is at https://www.latex-project.org/lppl/
@@ -242,9 +246,9 @@
 
 % Citations: natbib with options matching class (harvard or numeric)
 \ifqdissertation@cite@harvard
-  \RequirePackage[authoryear,round,sort&compress,longnamesfirst]{natbib}%
+  \RequirePackage[authoryear,round,sort&compress]{natbib}%
   % Author-year style: (Author, 2000; Author & Coauthor, 2001)
-  \bibpunct{(}{)}{;}{a}{,}{,}%
+  \bibpunct{(}{)}{;}{a}{}{,}%
 \else
   % Numeric, compressed: [1], [1,2], [1–3]
   \RequirePackage[numbers,sort&compress,square]{natbib}%
