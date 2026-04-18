@@ -1237,7 +1237,7 @@
 % defined it for this SPDX ID), then \bibliography{basename}.
 \newcommand{\bib}[1]{%
   \ifqdissertation@cite@harvard
-    \bibliographystyle{agsm}%
+    \bibliographystyle{agsm-modified}%
   \else
     \bibliographystyle{plainnat}%
   \fi
