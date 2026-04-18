@@ -18,7 +18,7 @@
 % LaTeX Project Public License (LPPL), version 1.3c.
 % The latest version of this license is at https://www.latex-project.org/lppl/
 % This work has the LPPL maintenance status `maintained'.
-% The Current Maintainer of this work is Frank Langbein <frank@langbein.org>.
+% The Current Maintainer of this modified version is Drewan Rutherford <DrewanR@protonmail.com>
 % This work consists of this file and the template files in the same distribution.
 %
 % User commands (set in preamble): \title, \author, \degree, \university, \date;
