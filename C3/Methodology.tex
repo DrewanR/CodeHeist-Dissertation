@@ -1,0 +1,92 @@
+% =============================================================================
+% CHAPTER 3: Methodology (or ``Specification, Design and Implementation'' / ``Approach'')
+% =============================================================================
+% SPDX-FileCopyrightText: 2026 Drewan Rutherford <RutherfordD@cardiff.ac.uk>
+% SPDX-License-Identifier: LPPL-1.3c
+%
+% This chapter describes how your solution works. Title it Methodology, Approach,
+% or Specification, Design and Implementation; adapt or split as needed. Not all
+% sections below apply to every project---pick, omit, or rename.
+% =============================================================================
+
+There were twelve weeks available for this project, including writing this report and background research, excluding the three weeks of the Easter Recess, which was used as an overflow period. As demonstrated during the initial plan, the project was split into the four phrases shown in table~\ref{tab:phases}.
+
+%\begin{enumerate}[label=\textbf{Phase \arabic*:}, leftmargin=*]
+%    \item \textit{2 Weeks} Background research and planning,
+%    \item \textit{6-8 Weeks} Game development,
+%    \item Evaluation,
+%    \item Report writing.
+%\end{enumerate}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{llr}
+        \toprule
+        \multicolumn{2}{l}{\textbf{Phase}} & Duration\\
+        \midrule
+        \textbf{1:} & Research  & 2 wks\\
+        \textbf{2:} & Game Development  & 6 -- 8 wks\\
+        \textbf{3:} & Evaluation*  & 1 wks\\
+        \textbf{4:} & Report writing* & 2 wks
+        \\ \bottomrule
+    \end{tabular}
+    \newline
+    \vspace*{0.75\baselineskip}
+    *Work was expected to begin before the true start of the phase.
+    \newline
+    \caption{The project phases included in the work plan.}
+    \label{tab:phases}
+\end{table}
+
+This approach was chosen to simulate having a dedicated development period without sacrificing evaluation and report writing time. 
+
+Due to the unpredictability of game development, and lack of existing projects similar to this, it was decided to have multiple potential methods of evaluation. 6 -- 8 weeks was chosen because this placed the end of development at the start of the Easter Recess, which meant that the float time was after the most unpredictable part of development.
+
+\section{Development}\label{sec:methodology/ReqEng}
+
+Requirements and development planning were to be developed in two rounds. First, during phase 1, detailing the requirements for the core Systems such as catCode, henceforth referred to as the \textquote{Core Requirements}. Second, during phase 2, after the core systems have been implemented detailing the requirements for the rest of the game, referred to as \textquote{Wider Requirements}.
+
+As mentioned before, the game development was the most unpredictable component to this project, and the Core Systems were expected to be the most complex part of that. This meant that the duration of implementing these could not be determined. As well as this, it would not be clear what form the Core Systems would take.
+
+Delaying the planning of the later phases would allow the latter half of development to be designed to fill whatever time was remaining of phase 2. As well as this, it means that levels will not be designed until before the details of catCode have been fleshed out. This would prevent, to name one example, a level designed around the player implementing water controls being created when water physics haven't been implemented.
+
+\section{Evaluation}
+
+There were multiple scenarios considered for evaluation based on the progress when the feature freeze was reached. The scenarios considered are shown in table~\ref{tab:evaluationScenarios}.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lr}\toprule
+        \textbf{ID} & \textbf{Scenario}  \\\midrule
+        \textbf{1} & Only core systems could be created, without time to create a survey. \\
+        \textbf{2} & No final levels could be created. \\ 
+        \textbf{3a} & Some final levels could be created. \\
+        \textbf{3b} & A full game could be created. \\
+    \bottomrule\end{tabular}
+    \caption{Evaluation scenarios. Final level is defined as a level which is in a state appropriate for a finished game.}
+    \label{tab:evaluationScenarios}
+\end{table}
+
+The worse case scenario, scenario 1, was that only the core systems had been completed at the time of phase 3. In this scenario, the most recent build of the prototype will be evaluated against the Core Requirements. This is not optimal as it relies exclusively on the judgement of the author, who is also the developer. This result is not on its own considered a failure on its own nor would it in without value. Instead this would serve to either evaluate the foundations created, the potential for expansion, or -- at worst -- demonstrate that plausibility of an 8 week development period\footnote{Whilst the development period was intended to be 6 weeks long, scenario 1 will only occur if two weeks of the Easter overflow period are used}.
+
+Following this, if possible, user testing would be conducted. This covers scenarios 2, 3a, 3b. Scenario 1 does not fall into this category as it would only occur if there is not sufficient time to do this. A few different types of survey could be used depending on the progress completed and time available.
+
+\subsection{Survey-build evaluation}
+
+If the prototype falls into scenarios 2, and sufficient time is available to create this (but not a full prototype game), this method of evaluation will be used. This method involves the creation of a few test levels designed for the test user to evaluate the cores systems, and a survey to go alongside them.
+
+\subsection{Full or part game evaluation}
+
+This would be used if the prototype reaches a point where there are multiple final levels, or a complete game. Essentially, this is to be used if the game/games system can stand on its own. This method will get the respondent to play through the game and then answer questions. Essentially, rather than creating the levels as an extension of a survey, the survey will be created around the game.
+
+\subsection{Confidence based survey}
+
+This would be done as a part of the a full game evaluation. This will involved asking some questions before and after the respondent plays the game. These questions will be designed to evaluate the respondents confidence and/or competence surrounding programming.
+
+\section{Legal and Ethical Considerations}
+
+For ethical reasons, user testing involving children was not possible. This is because collecting data from or about vulnerable people does not qualify for simplified ethical approval. Simplified ethical approval would be required due to the time frame allotted to this project. Because of this all user evaluations and survey are to be completed by adults as user testing by adults is permitted.
+
+Legally, as mentioned in [TODO: reference to background], there aren't any complications presented by using the Godot game engine as it is published under an MIT license, which means we are \textquote{free to use Godot Engine, for any purpose} \citep{GodotLis}. The use of assets the author possesses copyright over, due to creating, also serves to alleviate concerns of copyright.
+
+Finally, all data stored collected will be securely stored and eventually deleted as per the university's policies.
