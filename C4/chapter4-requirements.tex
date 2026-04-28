@@ -35,117 +35,117 @@ The Core Requirement specification, shown in \autoref{tab:coreRequirements/gener
     & Requirement
     & Priority \\ \midrule
     \endhead
-    CR-99
+    CR-01
     & General
-    & Controls \textbf{must} be responsive.
+    & Controls must be responsive.
     & \textbf{Must}
     \\
-    CR-x
+    CR-02
     & General
-    & CatCode \textbf{must} be able to interface directly with CatBot.
+    & CatCode must be able to interface directly with CatBot.
     & \textbf{Must}
     \\ 
-    CR-x
+    CR-03
     & General
-    & There \textbf{must} be a configurable mechanism in place for Auto Controlling (non-player implemented control system) CatBot.
+    & There must be a configurable mechanism in place for Auto Controlling (non-player implemented control system) CatBot.
     & \textbf{Must}
     \\
-    CR-x
+    CR-04
     & General
     & Implementation of configurable controls.
     & \textbf{Won't}
     \\ 
-    CR-x
+    CR-05
     & Player
-    & When auto-controlled, CatBot's movement \textbf{should} be responsive, fluid, and enjoyable in isolation.
+    & When auto-controlled, CatBot's movement should be responsive, fluid, and enjoyable in isolation.
     & \textbf{Should}
     \\
-    CR-x
+    CR-06
     & Player
     & When auto-controlled, CatBot will have the expected features for a platformer player described in \autoref{tab:coreRequirements/autoCatFeatures}.
     & \textbf{--}
     \\
-    CR-x
+    CR-07
     & Player
-    & Movement (including abilities) \textbf{should} be fluid and fun in isolation.
+    & Movement (including abilities) should be fluid and fun in isolation.
     & \textbf{Should}
     \\
-    CR-x
+    CR-08
     & Player
-    & Movement (including abilities) \textbf{could} also be fluid and fun when using CatCode
+    & Movement (including abilities) could also be fluid and fun when using CatCode
     & \textbf{Could}
     \\
-    CR-x
+    CR-09
     & Back-end
-    & There \textbf{must} be a simple mechanism for setting allowed CatCode blocks in the Godot editor, per level.
+    & There must be a simple mechanism for setting allowed CatCode blocks in the Godot editor, per level.
     & \textbf{Must}
     \\
-    CR-x
+    CR-10
     & Back-end
-    & It \textbf{should} be possible to add new Logic Blocks without reconfiguring CatCode's architecture nor significant effort on the devlopers end. 
+    & It should be possible to add new Logic Blocks without reconfiguring CatCode's architecture nor significant effort on the devlopers end. 
     & \textbf{Should}
     \\
-    CR-x
+    CR-11
     & Back-end
-    & It \textbf{should} be possible to add new Graphical Blocks without reconfiguring CatCode's architecture nor significant effort on the devlopers end. 
+    & It should be possible to add new Graphical Blocks without reconfiguring CatCode's architecture nor significant effort on the devlopers end. 
     & \textbf{Should}
     \\
-    CR-x
+    CR-12
     & Back-end
-    & The implementation of the Runner, Code Editor, and Output \textbf{should} be separable and interchangeable.
+    & The implementation of the Runner, Code Editor, and Output should be separable and interchangeable.
     & \textbf{Should}
     \\
-    CR-x
+    CR-13
     & Back-end
-    & There \textbf{could} be a system for managing the camera beyond it following the player. This could include modifying the camera's zoom or position when in a field.
+    & There could be a system for managing the camera beyond it following the player. This could include modifying the camera's zoom or position when in a field.
     & \textbf{Could}
     \\
-    CR-x
+    CR-14
     & CatCode
-    & CatCode, in whatever player-facing form it takes in the final game, \textbf{should} not be able to crash the game.
+    & CatCode, in whatever player-facing form it takes in the final game, should not be able to crash the game.
     & \textbf{Should}
     \\
-    CR-x
+    CR-15
     & CatCode
-    & Invalid parameters \textbf{must} not be able to crash the game, and should create an in-game error.
+    & Invalid parameters must not be able to crash the game, and should create an in-game error.
     & \textbf{Must}
     \\
-    CR-x
+    CR-16
     & CatCode
     & The player should be able to able to recreate all of the auto-controlled mechanics. Individual priorities shown in \autoref{tab:coreRequirements/autoCatFeaturesInCatCode}.
     & \textbf{--}
     \\
-    CR-x
+    CR-17
     & CatCode
     & CatCode should feature have the features typically found in proper programming languages shown in \autoref{tab:coreRequirements/catCode-features}.
     & \textbf{--}
     \\
-    CR-x
+    CR-18
     & CatCode
     & There could be a GUI version of CatCode, called Graphical CatCode.
     & \textbf{Could}
     \\
-    CR-x
+    CR-19
     & CatCode
     & When in-game errors occur, it must be clear what went wrong and how to fix it.
     & \textbf{Must}
     \\
-    CR-x
+    CR-20
     & GUI-CC
     & It should be clear in-game what every block does.
     & \textbf{Should}
     \\
-    CR-x
+    CR-21
     & GUI-CC
     & Adding blocks to a script should be intuitive and easy, either through drag-and-drop or within two clicks.
     & \textbf{Should}
     \\
-    CR-x
+    CR-22
     & GUI-CC
     & Deleting blocks from a script should be intuitive and easy, either through drag-and-drop or within two clicks.
     & \textbf{Should}
     \\
-    CR-x
+    CR-23
     & GUI-CC
     & Reordering blocks in a script should be intuitive and easy, either through drag-and-drop or within two clicks.
     & \textbf{Should}
@@ -167,27 +167,27 @@ The Core Requirement specification, shown in \autoref{tab:coreRequirements/gener
     & Requirement
     & Priority \\ \midrule
     \endhead
-    CR-x.1
+    CR-06.1
     & Horizontal movement, with semi-realistic friction.
     & \textbf{Must}
     \\
-    CR-x.2
+    CR-06.2
     & Jumping, and semi-realistic gravity.
     & \textbf{Must}
     \\
-    CR-x.3
+    CR-06.3
     & Variable jump height.
     & \textbf{Should}
     \\
-    CR-x.4
+    CR-06.4
     & Swiping/Striking/Attacking when grounded.
     & \textbf{Should}
     \\
-    CR-x.5
+    CR-06.5
     & [...] up to twice in the air.
     & \textbf{Should}
     \\
-    CR-x.6
+    CR-06.6
     & Wall climbing and wall jumping.
     & \textbf{Won't}
     \\ 
@@ -208,27 +208,27 @@ The Core Requirement specification, shown in \autoref{tab:coreRequirements/gener
     & Requirement
     & Priority \\ \midrule
     \endhead
-    CR-x.1
+    CR-16.1
     & Horizontal movement, with customisable speed.
     & \textbf{Should}
     \\
-    CR-x.2
+    CR-16.2
     & Jumping, throwing an error if not grounded.
     & \textbf{Must}
     \\
-    CR-x.3
+    CR-16.3
     & Variable jump height.
     & \textbf{Won't}
     \\
-    CR-x.4
+    CR-16.4
     & Swiping/Striking/Attacking when grounded.
     & \textbf{Should}
     \\
-    CR-x.5
+    CR-16.5
     & [...] up to twice in the air, throwing an error if this number is exceeded.
     & \textbf{Could}
     \\
-    CR-x.6
+    CR-16.6
     & Wall climbing and wall jumping.
     & \textbf{Won't}
     \\ 
@@ -249,87 +249,87 @@ The Core Requirement specification, shown in \autoref{tab:coreRequirements/gener
     & \multicolumn{2}{l}{Requirement}
     & Priority \\ \midrule
     \endhead
-    CR-x.1
+    CR-17.1
     & \multicolumn{2}{l}{Execute pre-defined functions in sequence.}
     & \textbf{Must}
     \\
-    CR-x.2
+    CR-17.2
     & \multicolumn{2}{l}{Structural elements:}
     & \textbf{--}
     \\
-    CR-x.2.1
+    CR-17.2.1
     & -- & Basic selection (\texttt{if})
     & \textbf{Should}
     \\
-    CR-x.2.2
+    CR-17.2.2
     & -- & Complex selection (\texttt{else}, and \texttt{elif})
     & \textbf{Could}
     \\
-    CR-x.2.3
+    CR-17.2.3
     & -- & Basic definite iteration (\texttt{repeat})
     & \textbf{Could}
     \\
-    CR-x.2.3
+    CR-17.2.3
     & -- & Complex iteration (\texttt{for}, and \texttt{while})
     & \textbf{Won't}
     \\
-    CR-x.3
+    CR-17.3
     & \multicolumn{2}{l}{Predefined functions with:}
     & \textbf{--}
     \\
-    CR-x.3.1
+    CR-17.3.1
     & -- & No parameters
     & \textbf{Must}
     \\
-    CR-x.3.2
+    CR-17.3.2
     & -- & One parameter, numerical or text.
     & \textbf{Must}
     \\
-    CR-x.3.3
+    CR-17.3.3
     & -- & Two parameters, numerical or text.
     & \textbf{Should}
     \\
-    CR-x.3.4
+    CR-17.3.4
     & -- & Any number of parameters
     & \textbf{Could}
     \\
-    CR-x.4
+    CR-17.4
     & \multicolumn{2}{l}{The following functions:}
     & \textbf{--}
     \\
-    CR-x.4.1
+    CR-17.4.1
     & -- & \texttt{print(text)}
     & \textbf{Must}
     \\
-    CR-x.4.2
+    CR-17.4.2
     & -- & \texttt{print2(text1,text2)}
     & \textbf{Must}
     \\
-    CR-x.4.3
+    CR-17.4.3
     & -- & \texttt{isButtonPressed(...)}
     & \textbf{Should}
     \\
-    CR-x.4.4
+    CR-17.4.4
     & -- & \texttt{isJustButtonPressed(...)}
     & \textbf{Should}
     \\
-    CR-x.4.5
+    CR-17.4.5
     & -- & \texttt{jump()}, \texttt{move()}, \texttt{swipe()} etc.
     & \textbf{Should}
     \\
-    CR-x.4.6
+    CR-17.4.6
     & -- & \texttt{isGrounded()}, \texttt{canSwipe()} etc.
     & \textbf{Could}
     \\
-    CR-x.5
+    CR-17.5
     & \multicolumn{2}{l}{Boolean logic (\texttt{and}, \texttt{or}, and \texttt{not}).}
     & \textbf{Could}
     \\
-    CR-x.6
+    CR-17.6
     & \multicolumn{2}{l}{Variables.}
     & \textbf{Won't}
     \\
-    CR-x.7
+    CR-17.7
     & \multicolumn{2}{l}{User defined functions.}
     & \textbf{Won't}
     \\
