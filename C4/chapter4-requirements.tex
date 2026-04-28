@@ -10,3 +10,359 @@ As mentioned in \autoref{sec:methodology/development}, requirements were to be d
 All the requirements listed here use the MoSCoW requirements system as described by \citet{useCaseModelling-MoSCoW}. For our uses, the \textquote{W} stands for \textquote{Want to have but will not have this time round}, and will be interpreted as not being required but must be possible to be implemented later without significant restructuring or rewriting.
 
 \section{Core Requirements}\label{sec:requirements/core}
+
+The Core Requirement specification, shown in \autoref{tab:coreRequirements/general}, were wrote with the following assumptions about the game:
+
+\begin{enumerate}
+    \item The game is in the platformer genre.
+    \item The game must contain programming elements.
+    \item The Core Systems can be developed isolated from the scenario, and before the level design process.
+    \item Non-core systems, such as dialogue, can be implemented later as and when/if they are needed.
+\end{enumerate}
+
+\begin{center}
+  \begin{longtable}{llp{9.5cm}r}
+    \caption{The Core Requirements. Phrasing has been adjusted to match the terminology used in the project where appropriate to minimise confusion.} \label{tab:coreRequirements/general} \\
+    \toprule
+    ID
+    & Category
+    & Requirement
+    & Priority \\ \midrule
+    \endfirsthead
+    \toprule
+    ID
+    & Category
+    & Requirement
+    & Priority \\ \midrule
+    \endhead
+    CR-99
+    & General
+    & Controls \textbf{must} be responsive.
+    & \textbf{Must}
+    \\
+    CR-x
+    & General
+    & CatCode \textbf{must} be able to interface directly with CatBot.
+    & \textbf{Must}
+    \\ 
+    CR-x
+    & General
+    & There \textbf{must} be a configurable mechanism in place for Auto Controlling (non-player implemented control system) CatBot.
+    & \textbf{Must}
+    \\
+    CR-x
+    & General
+    & Implementation of configurable controls.
+    & \textbf{Won't}
+    \\ 
+    CR-x
+    & Player
+    & When auto-controlled, CatBot's movement \textbf{should} be responsive, fluid, and enjoyable in isolation.
+    & \textbf{Should}
+    \\
+    CR-x
+    & Player
+    & When auto-controlled, CatBot will have the expected features for a platformer player described in \autoref{tab:coreRequirements/autoCatFeatures}.
+    & \textbf{--}
+    \\
+    CR-x
+    & Player
+    & Movement (including abilities) \textbf{should} be fluid and fun in isolation.
+    & \textbf{Should}
+    \\
+    CR-x
+    & Player
+    & Movement (including abilities) \textbf{could} also be fluid and fun when using CatCode
+    & \textbf{Could}
+    \\
+    CR-x
+    & Back-end
+    & There \textbf{must} be a simple mechanism for setting allowed CatCode blocks in the Godot editor, per level.
+    & \textbf{Must}
+    \\
+    CR-x
+    & Back-end
+    & It \textbf{should} be possible to add new Logic Blocks without reconfiguring CatCode's architecture nor significant effort on the devlopers end. 
+    & \textbf{Should}
+    \\
+    CR-x
+    & Back-end
+    & It \textbf{should} be possible to add new Graphical Blocks without reconfiguring CatCode's architecture nor significant effort on the devlopers end. 
+    & \textbf{Should}
+    \\
+    CR-x
+    & Back-end
+    & The implementation of the Runner, Code Editor, and Output \textbf{should} be separable and interchangeable.
+    & \textbf{Should}
+    \\
+    CR-x
+    & Back-end
+    & There \textbf{could} be a system for managing the camera beyond it following the player. This could include modifying the camera's zoom or position when in a field.
+    & \textbf{Could}
+    \\
+    CR-x
+    & CatCode
+    & CatCode, in whatever player-facing form it takes in the final game, \textbf{should} not be able to crash the game.
+    & \textbf{Should}
+    \\
+    CR-x
+    & CatCode
+    & Invalid parameters \textbf{must} not be able to crash the game, and should create an in-game error.
+    & \textbf{Must}
+    \\
+    CR-x
+    & CatCode
+    & The player should be able to able to recreate all of the auto-controlled mechanics. Individual priorities shown in \autoref{tab:coreRequirements/autoCatFeaturesInCatCode}.
+    & \textbf{--}
+    \\
+    CR-x
+    & CatCode
+    & CatCode should feature have the features typically found in proper programming languages shown in \autoref{tab:coreRequirements/catCode-features}.
+    & \textbf{--}
+    \\
+    CR-x
+    & CatCode
+    & There could be a GUI version of CatCode, called Graphical CatCode.
+    & \textbf{Could}
+    \\
+    CR-x
+    & CatCode
+    & When in-game errors occur, it must be clear what went wrong and how to fix it.
+    & \textbf{Must}
+    \\
+    CR-x
+    & GUI-CC
+    & It should be clear in-game what every block does.
+    & \textbf{Should}
+    \\
+    CR-x
+    & GUI-CC
+    & Adding blocks to a script should be intuitive and easy, either through drag-and-drop or within two clicks.
+    & \textbf{Should}
+    \\
+    CR-x
+    & GUI-CC
+    & Deleting blocks from a script should be intuitive and easy, either through drag-and-drop or within two clicks.
+    & \textbf{Should}
+    \\
+    CR-x
+    & GUI-CC
+    & Reordering blocks in a script should be intuitive and easy, either through drag-and-drop or within two clicks.
+    & \textbf{Should}
+    \\
+    \bottomrule
+  \end{longtable}
+\end{center}
+
+\begin{center}
+  \begin{longtable}{lp{9.5cm}r}
+    \caption{Expected features for CatBot. \textquote{Semi-realistic} refers to a system that \textquote{feels} right, i.e. behaves as expected, but not necessarily matching real-life gravity.} \label{tab:coreRequirements/autoCatFeatures} \\
+    \toprule
+    ID
+    & Requirement
+    & Priority \\ \midrule
+    \endfirsthead
+    \toprule
+    ID
+    & Requirement
+    & Priority \\ \midrule
+    \endhead
+    CR-x.1
+    & Horizontal movement, with semi-realistic friction.
+    & \textbf{Must}
+    \\
+    CR-x.2
+    & Jumping, and semi-realistic gravity.
+    & \textbf{Must}
+    \\
+    CR-x.3
+    & Variable jump height.
+    & \textbf{Should}
+    \\
+    CR-x.4
+    & Swiping/Striking/Attacking when grounded.
+    & \textbf{Should}
+    \\
+    CR-x.5
+    & [...] up to twice in the air.
+    & \textbf{Should}
+    \\
+    CR-x.6
+    & Wall climbing and wall jumping.
+    & \textbf{Won't}
+    \\ 
+    \bottomrule
+  \end{longtable}
+\end{center}
+
+\begin{center}
+  \begin{longtable}{lp{9.5cm}r}
+    \caption{Features from auto-controllers and their priority for potential player recreation using CatCode} \label{tab:coreRequirements/autoCatFeaturesInCatCode} \\
+    \toprule
+    ID
+    & Requirement
+    & Priority \\ \midrule
+    \endfirsthead
+    \toprule
+    ID
+    & Requirement
+    & Priority \\ \midrule
+    \endhead
+    CR-x.1
+    & Horizontal movement, with customisable speed.
+    & \textbf{Should}
+    \\
+    CR-x.2
+    & Jumping, throwing an error if not grounded.
+    & \textbf{Must}
+    \\
+    CR-x.3
+    & Variable jump height.
+    & \textbf{Won't}
+    \\
+    CR-x.4
+    & Swiping/Striking/Attacking when grounded.
+    & \textbf{Should}
+    \\
+    CR-x.5
+    & [...] up to twice in the air, throwing an error if this number is exceeded.
+    & \textbf{Could}
+    \\
+    CR-x.6
+    & Wall climbing and wall jumping.
+    & \textbf{Won't}
+    \\ 
+    \bottomrule
+  \end{longtable}
+\end{center}
+
+\begin{center}
+  \begin{longtable}{lp{0.5cm}p{7cm}r}
+    \caption{Desired features for CatCode.} \label{tab:coreRequirements/catCode-features} \\
+    \toprule
+    ID
+    & \multicolumn{2}{l}{Requirement}
+    & Priority \\ \midrule
+    \endfirsthead
+    \toprule
+    ID
+    & \multicolumn{2}{l}{Requirement}
+    & Priority \\ \midrule
+    \endhead
+    CR-x.1
+    & \multicolumn{2}{l}{Execute pre-defined functions in sequence.}
+    & \textbf{Must}
+    \\
+    CR-x.2
+    & \multicolumn{2}{l}{Structural elements:}
+    & \textbf{--}
+    \\
+    CR-x.2.1
+    & -- & Basic selection (\texttt{if})
+    & \textbf{Should}
+    \\
+    CR-x.2.2
+    & -- & Complex selection (\texttt{else}, and \texttt{elif})
+    & \textbf{Could}
+    \\
+    CR-x.2.3
+    & -- & Basic definite iteration (\texttt{repeat})
+    & \textbf{Could}
+    \\
+    CR-x.2.3
+    & -- & Complex iteration (\texttt{for}, and \texttt{while})
+    & \textbf{Won't}
+    \\
+    CR-x.3
+    & \multicolumn{2}{l}{Predefined functions with:}
+    & \textbf{--}
+    \\
+    CR-x.3.1
+    & -- & No parameters
+    & \textbf{Must}
+    \\
+    CR-x.3.2
+    & -- & One parameter, numerical or text.
+    & \textbf{Must}
+    \\
+    CR-x.3.3
+    & -- & Two parameters, numerical or text.
+    & \textbf{Should}
+    \\
+    CR-x.3.4
+    & -- & Any number of parameters
+    & \textbf{Could}
+    \\
+    CR-x.4
+    & \multicolumn{2}{l}{The following functions:}
+    & \textbf{--}
+    \\
+    CR-x.4.1
+    & -- & \texttt{print(text)}
+    & \textbf{Must}
+    \\
+    CR-x.4.2
+    & -- & \texttt{print2(text1,text2)}
+    & \textbf{Must}
+    \\
+    CR-x.4.3
+    & -- & \texttt{isButtonPressed(...)}
+    & \textbf{Should}
+    \\
+    CR-x.4.4
+    & -- & \texttt{isJustButtonPressed(...)}
+    & \textbf{Should}
+    \\
+    CR-x.4.5
+    & -- & \texttt{jump()}, \texttt{move()}, \texttt{swipe()} etc.
+    & \textbf{Should}
+    \\
+    CR-x.4.6
+    & -- & \texttt{isGrounded()}, \texttt{canSwipe()} etc.
+    & \textbf{Could}
+    \\
+    CR-x.5
+    & \multicolumn{2}{l}{Boolean logic (\texttt{and}, \texttt{or}, and \texttt{not}).}
+    & \textbf{Could}
+    \\
+    CR-x.6
+    & \multicolumn{2}{l}{Variables.}
+    & \textbf{Won't}
+    \\
+    CR-x.7
+    & \multicolumn{2}{l}{User defined functions.}
+    & \textbf{Won't}
+    \\
+    \bottomrule
+  \end{longtable}
+\end{center}
+
+%\begin{center}
+%  \begin{longtable}{llp{9.5cm}r}
+%    \caption{Template... so I dont go insane. TODO: Remove} \label{tab:coreRequirements/template} \\
+%    \toprule
+%    ID
+%    & Category
+%    & Requirement
+%    & Pr \\ \midrule
+%    \endfirsthead
+%    \toprule
+%    ID
+%    & Category
+%    & Requirement
+%    & Pr \\ \midrule
+%    \endhead
+%    CR-1
+%    & General
+%    & Controls \textbf{must} be responsive.
+%    & \textbf{M}
+%    \\ 
+%    \bottomrule
+%  \end{longtable}
+%\end{center}
+
+\section{Specifying CatCode Requirements DRAFT}
+
+Originally, the plan was to use the Welsh curriculum to create a list of required features, however the curriculum was not prescriptive with content, rather providing more of a guide. This was helpful in providing content for the wider game -- especially progression -- but not here. As a backup, the English curriculum was used, however this feel into a similar problem.
+
+Rather than turning to higher level English requirements such as TODO, we decided to create a list of requirements based on the fundamental building blocks of programming using both our own experience, comparing the documentation (especially keywords) of popular languages such as python, and Scratch's own blocks as a guide. Our main departures from this occurred when providing the tools required to recreate the auto-controlled CatBot, which resulted in the requirement for extra functions such as \texttt{isGrounded()}, \texttt{jump()} and \texttt{isButtonHeld()}. 
