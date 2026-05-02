@@ -168,6 +168,16 @@
 \usepackage{relsize}         % \textlarger, \textsmaller for relative font sizing
 \usepackage[version=4]{mhchem} % Chemical formulae: \ce{H2O}, \ce{CO2}, \ce{^1H-NMR}
 
+\usepackage{tcolorbox}       % Adds support for putting boxes around elements
+\tcbuselibrary{breakable}    % tcolorbox parameters
+\tcbset{
+  center,
+  breakable,
+  colback=white,
+  sharp corners=all
+}
+
+
 % Floats
 \usepackage{float}           % [H] = here definitely
 \usepackage{stfloats}        % Improved placement for bottom floats

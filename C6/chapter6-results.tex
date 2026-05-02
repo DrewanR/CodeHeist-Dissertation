@@ -11,19 +11,45 @@
 % critically appraise strengths and weaknesses.
 % =============================================================================
 
-This chapter presents the results and evaluates them. Describe how the solution was demonstrated, include test or experimental results, and critically appraise strengths and weaknesses.
+As mentioned in \autoref{ch3:results/method}, there were multiple plans for evaluation. The project ended up falling into scenario 1 of \autoref{tab:evaluation_scenarios} \nameref{tab:evaluation_scenarios}. A full survey was created for scenario 2, however, insufficient time was available to distribute the survey. A copy of the survey is available in \textbf{[TODO APPENDIX]}, and the survey build is available in \nameref{ch0:source_and_deployments}. More details of the time constraints will be \textbf{[TODO]}.
 
-\section{Setup}\label{sec:setup}
-% Evaluation setup: data, metrics, baselines, how experiments or tests were run.
-% Optional subsections: environment, hyperparameters, evaluation protocol.
+Development of the prototype did not go according to plan. This is because the project ended up being far more complex and complicated than expected, which resulted in the development of the Core Systems taking the full time allotted to development \textit{and} the overflow time.
 
-\section{Results}\label{sec:results}
+\section{Results}
 % Main findings: present tables and figures; summarise key outcomes. Optional
 % subsections: by research question, by dataset, or by metric.
 
-\section{Discussion}\label{sec:discussion}
+\subsection{Requirements analysis}\label{sec:results/reqAnalysis}
+Most of the requirements listed are fairly intuitive for evaluation by the developer. However, many would have been better evaluated through user testing as originally planned. Due to time constraints these have been evaluated by the developer only. Each requirement has been given a score, according to the criteria listed in \autoref{tab:results/passCriteria}.
+
+\subsection{Developer Report}
+After development was completed, an informal report was written analysing development. The aim of this report was to identify key findings and insights from the development. The full report is available in [THE APPENDICES], the main conclusions listed in \autoref{fig:results/developmentConclusions}.
+
+\begin{figure}[H]
+    \centering
+    \begin{tcolorbox}
+    \begin{enumerate}
+        \item The Godot engine was the right choice for many reasons, but also had numerous drawbacks.
+        \item 8 weeks were not sufficient for developing this game.
+        \item Exception handling, whilst not always helpful for game development, would have made CatCode easier to develop.
+        \item Stronger typing, as well as public and private methods and variables, would have also made development easier.
+        \item Due to lack of well-documented similar systems, there was no reasonable way to foresee any of the issues that occurred.
+        \item Once the foundations were finished (approximately 3 days before the feature freeze) devlopment was far quicker.
+        \item In spite of the drawbacks, development was still enjoyable.
+    \end{enumerate}
+    \end{tcolorbox}
+    \caption{Developer report conclusions.}
+    \label{fig:results/developmentConclusions}
+\end{figure}
+
+
+\section{Discussion}\label{sec:results/discussion}
 % Critical appraisal: strengths, weaknesses, methodology choices; comparison
 % with prior work. Optional: ablation analysis, sensitivity analysis.
 
-\section{Limitations}\label{sec:limitations}
+\section{Limitations}\label{sec:results/limitations}
 % Limitations, threats to validity, and suggested further tests if not all done.
+As mentioned before, there wasn't sufficient time and resources to perform the user evaluation, for subjective front-end requirements, instead relying exclusively on developer judgement. This, as described by \textbf{[find a comedic number of sources]}, is prone to \textbf{[TODO why its bad]}.
+
+Outside of this, it is impossible to evaluate an approach to teaching using a specific type of game when you have not finished the game. As a result of this, any conclusion on the efficacy of this approach is speculative, or based on its foundations. And, any conclusions here are based on the work of a single developer.
+ 
