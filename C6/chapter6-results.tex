@@ -19,28 +19,77 @@ Development of the prototype did not go according to plan. This is because the p
 % Main findings: present tables and figures; summarise key outcomes. Optional
 % subsections: by research question, by dataset, or by metric.
 
-\subsection{Requirements analysis}\label{sec:results/reqAnalysis}
-Most of the requirements listed are fairly intuitive for evaluation by the developer. However, many would have been better evaluated through user testing as originally planned. Due to time constraints these have been evaluated by the developer only. Each requirement has been given a score, according to the criteria listed in \autoref{tab:results/passCriteria}.
+\subsection{Requirements Analysis}\label{sec:results/reqAnalysis}
+Most of the requirements listed are fairly intuitive for evaluation by the developer. However, many would have been better evaluated through user testing as originally planned. Due to time constraints these have been evaluated by the developer only. These requirements are denoted with an asterisk.
+
+Each requirement has been given a score, according to the criteria summarised in \autoref{tab:results/passCriteria}. The results are listed in \autoref{tab:results/cr/general}, \ref{tab:results/cr/autoCatFeatures}, \ref{tab:results/cr/autoCatFeaturesInCatCode}, and \ref{tab:results/cr/catCode-features}.
+
+To calculate a final score, a weighted total of each of Core Requirement's scores is taken. The weights are applied according to the priority. Then, to convert this to a percentage, this number divided by the maximum possible number of points. The details of this calculation are shown in \autoref{ReqAnalysisResults}.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[t]{0.5\linewidth}
+    \centering
+    \begin{tabular}{cp{0.8\linewidth}}\toprule
+        3 & Unambiguous pass \\
+        2 & Marginal pass \\
+        1 & Failure, with possible future implementation \\
+        0 & Failure, without easy future implementation
+    \\ \bottomrule\end{tabular}
+    \subcaption{Scores for \textquote{Must}, \textquote{Should}, and \textquote{Could} requirements.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.45\linewidth}
+    \centering
+    \begin{tabular}{cp{0.8\linewidth}}\toprule
+        3 & Trivial future implementation \\
+        2 & Possible future implementation \\
+        1 & Unknown \\
+        0 & Impossible to implement in the future
+    \\ \bottomrule\end{tabular}
+    \subcaption{Scores for \textquote{Won't} requirements.}
+  \end{subfigure}
+  \caption[Requirement analysis score definitions]{Requirement analysis score definitions.}
+  \label{tab:results/passCriteria}
+\end{figure}
+
+\input{C6/chapter6-results-requirementEval}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|cc|c|cc|c|}\hline
+        \textbf{Priority}& \textbf{Number}& \multicolumn{2}{c|}{\textbf{Score}} & \textbf{Weight}& \multicolumn{2}{c|}{\textbf{Weighted Score}}&\textbf{Percentage}\\
+        & & Result & Max & & Result & Max & \\\hline
+        \textbf{Must}   & 14 &  39 &  42 & x 2   &  78 &  84 & 93\% \\
+        \textbf{Should} & 23 &  56 &  72 & x 1.5 &  84 & 108 & 78\% \\
+        \textbf{Could}  &  9 &  22 &  27 & x 1   &  22 &  27 & 81\% \\
+        \textbf{Won't}  &  7 &  12 &  21 & x 1   &  12 &  21 & 57\% \\ \hline
+        \textbf{Total}  & 53 & 129 & 159 &   --- & 196 & 240 & \textbf{81\%} \\ \hline
+    \end{tabular}
+    \caption{Caption}
+    \label{ReqAnalysisResults}
+\end{table}
 
 \subsection{Developer Report}
 After development was completed, an informal report was written analysing development. The aim of this report was to identify key findings and insights from the development. The full report is available in [THE APPENDICES], the main conclusions listed in \autoref{fig:results/developmentConclusions}.
 
 \begin{figure}[H]
     \centering
-    \begin{tcolorbox}
-    \begin{enumerate}
-        \item The Godot engine was the right choice for many reasons, but also had numerous drawbacks.
-        \item 8 weeks were not sufficient for developing this game.
-        \item Exception handling, whilst not always helpful for game development, would have made CatCode easier to develop.
-        \item Stronger typing, as well as public and private methods and variables, would have also made development easier.
-        \item Due to lack of well-documented similar systems, there was no reasonable way to foresee any of the issues that occurred.
-        \item Once the foundations were finished (approximately 3 days before the feature freeze) devlopment was far quicker.
-        \item In spite of the drawbacks, development was still enjoyable.
-    \end{enumerate}
+    \begin{tcolorbox}[boxrule=0.25mm]
+        \begin{enumerate}
+            \item The Godot engine was the right choice for many reasons, but also had numerous drawbacks.
+            \item 8 weeks were not sufficient for developing this game.
+            \item Exception handling, whilst not always helpful for game development, would have made CatCode easier to develop.
+            \item Stronger typing, as well as public and private methods and variables, would have also made development easier.
+            \item Due to lack of well-documented similar systems, there was no reasonable way to foresee any of the issues that occurred.
+            \item Once the foundations were finished (approximately 3 days before the feature freeze) development was far quicker.
+            \item In spite of the drawbacks, development was still enjoyable.
+        \end{enumerate}
     \end{tcolorbox}
     \caption{Developer report conclusions.}
     \label{fig:results/developmentConclusions}
 \end{figure}
+
 
 
 \section{Discussion}\label{sec:results/discussion}
