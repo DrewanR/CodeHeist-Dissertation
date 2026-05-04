@@ -1,7 +1,7 @@
 % =============================================================================
 % CHAPTER 5: Conclusions and Future Work
 % =============================================================================
-% SPDX-FileCopyrightText: 2026 Frank Langbein <frank@langbein.org>
+% SPDX-FileCopyrightText: 2026 Drewan Rutherford <RutherfordD@cardiff.ac.uk>
 % SPDX-License-Identifier: LPPL-1.3c
 %
 % Suggested sections: Conclusions; Future work. Do not introduce new material in
@@ -10,10 +10,65 @@
 % contributions (as part of Conclusions or a bullet list).
 % =============================================================================
 
-This chapter concludes the dissertation. Summarise the aims, main results, and what was learned; then outline future work and improvements.
+% This chapter concludes the dissertation. Summarise the aims, main results, and what was learned; then outline future work and improvements.
 
 \section{Conclusions}\label{sec:conclusions}
 % Summary of aims, key results, and main takeaways. Optional: list of contributions.
+As mentioned before, a full prototype could not be made, nor could a user evaluation could be deployed. However, the Core Systems were developed to a high standard (81\%, whilst being harsh). Combined with the Developer's Report, it can be concluded that 8 weeks was not sufficient to develop a full, nor a full prototype; however, it such amount of time was sufficient to make a basic prototype of CatCode.
+
+This, sadly means that no conclusion can be made about the efficacy of thus approach, but we do believe that the approach does show great potential. We also think that there is demand for system similar to what we developed.
+
+Returning to our aims and objectives from \autoref{sec:introduction/aims_and_objectives}, we were able to partially fulfil our aim of \textquote{simulating a short development
+period to make a platforming game [that avoids the ``instruction sequence'' paradigm] and then evaluating the results}, though we were not evaluate this with users.
+
+Objective 1 was fulfilled earlier in this report, even if neither curriculum provided satisfactory answers. Objective 3 was fulfilled alongside objective 2. Only objective 4 wasn't fulfilled due to time constraints.
 
 \section{Future work}\label{sec:future}
 % Next steps, open questions, and what you would do with more time or resources.
+There is extensive future work that could be spawned off of this project. Much of this work falls into three main areas:
+
+\begin{enumerate}
+    \item Further research.
+    \item Finishing the game.
+    \item Alternate genre approaches.
+\end{enumerate}
+
+\subsection{Further Research}
+
+Most of the development of the prototype was based on the developer's subjective, heuristic judgement. Further research into teaching could be conducted to better design CatCode, the wider requirements, and level design. Also, primary research could be conducted with teachers to better develop requirements software to their needs. [\textbf{TODO MENTION THE TRIANGLE}]
+
+With, or without further background research, further studies should be carried on Code Heist itself. Beyond finishing the game, performing the planned user evaluation would have further contributed to the fulfilment of our objectives. Assuming that a more finished game was developed, evaluating subjects' confidence and/or competence with programming would also provide valuable insights to our approach.
+
+Beyond this, retesting the method described in \autoref{ch3:method} with either the same development period or a longer one, would assist with verifying whether this prototype's shortcomings were as a result of bad luck, incompetence, or the time-frame.
+
+\subsection{Finishing the Game}
+
+The main avenue for future work would be to continue development on Code Heist using the foundations already developed to create a more complete prototype or finished game. It is unclear whether this would be best approached as a research project or an art one as both approaches present advantages and disadvantages.
+
+There are a few improves that can be made to the core systems:
+
+\begin{itemize}
+    \item Implementing a method of re-ordering placed blocks.
+    \item Consider switching to a drag-and-drop system for CatCode.
+    \item Colour-coding graphical blocks by category.
+    \item Redeveloping CatCode's in-game documentation to match the GUI.
+    \item Re implementing climbing and wall jumps.
+\end{itemize}
+
+A significant amount of work was cut from the prototype associated with this report. Some of this work is available in \textbf{[TODO CREATE APPENDIX]}. This includes level concepts, scenario design, future mechanics, and early plans for non-core systems.
+
+\subsection{Alternative Genre Approaches}
+
+During development, numerous shortcomings of using the platforming genre were uncovered. The simplest of these was incorporating iteration into the game design. However, this issue may not be true for other genres, although they will have their own associated challenges.
+
+A few alternative approaches that could be investigated are listed below. For simplicity ideas here are expressed using the terminology of this paper:
+
+\begin{itemize}
+    \item An RPG (Roleplaying game), where rather than controlling characters directly, you implement their program their \textquote{AI}. This system could be a more developed version of systems that exist in: ()
+    \item Similar to the RPG idea, a rogue-like\footnote{Or rogue-lite in the likely scenario it strays from the \textbf{[ROGUELIKE DEFINITION]}} where items take the form of CatCode. This game could function similar to \textbf{[SLAY THE SPIRE]}, swapping the deck-building for programming where your hand is swapped for a script or scripts.
+    \item A tower defence game where each unit has access to different CatCode functions.
+    \item A puzzle game designed around CatCode.
+    \item A game that does not stick to any one genre, incorporating levels from multiple genres.
+\end{itemize}
+
+What is notable about a lot of the ideas above is that they stray closer to the game side of the triangle.
