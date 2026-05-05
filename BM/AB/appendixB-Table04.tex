@@ -1,0 +1,166 @@
+
+\begin{center}
+  \begin{longtable}{lp{0.5cm}p{7cm}rc}
+    \caption{Full evaluation of CatCode features} \label{tab:results/cr/catCode-features} \\
+    \toprule
+    \textbf{ID}
+    & \multicolumn{2}{l}{\textbf{Requirement}}
+    & \textbf{Priority}
+    & \textbf{Score}
+    \\
+    \multicolumn{5}{l}{
+        Justification (if applicable)
+    }
+    \\ \midrule
+    \endfirsthead
+    \toprule
+    \textbf{ID}
+    & \multicolumn{2}{l}{\textbf{Requirement}}
+    & \textbf{Priority}
+    & \textbf{Score}
+    \\
+    \multicolumn{5}{l}{
+        Justification (if applicable)
+    }
+    \\ \midrule
+    \endhead
+    \textbf{CR-17.1}
+    & \multicolumn{2}{l}{\textbf{Execute pre-defined functions in sequence.}}
+    & \textbf{Must}
+    & \textbf{3}
+    \\
+    \textbf{CR-17.2}
+    & \multicolumn{2}{l}{\textbf{Structural elements:}}
+    & \textbf{--}
+    & \textbf{--}
+    \\
+    \textbf{CR-17.2.1}
+    & \textbf{--} & \textbf{Basic selection (\texttt{if})}
+    & \textbf{Should}
+    & \textbf{3}
+    \\
+    \textbf{CR-17.2.2}
+    & \textbf{--} & \textbf{Complex selection (\texttt{else}, and \texttt{elif})}
+    & \textbf{Could}
+    & \textbf{3}
+    \\
+    \textbf{CR-17.2.3}
+    & \textbf{--} & \textbf{Basic definite iteration (\texttt{repeat})}
+    & \textbf{Could}
+    & \textbf{3}
+    \\
+    \textbf{CR-17.2.4}
+    & \textbf{--} & \textbf{Complex iteration (\texttt{for}, and \texttt{while})}
+    & \textbf{Won't}
+    & \textbf{1}
+    \\
+    \multicolumn{5}{p{0.98\linewidth}}{
+        \texttt{while} would be possible with the current tools. It is unknown who plausible \texttt{for} loops would be because these would depend on the difficulty of implementing variables, as they would be a prerequisite.
+    }
+    \\ \\
+    \textbf{CR-17.3}
+    & \multicolumn{2}{l}{\textbf{Predefined functions with:}}
+    & \textbf{--}
+    & \textbf{--}
+    \\
+    \textbf{CR-17.3.1}
+    & \textbf{--} & \textbf{No parameters}
+    & \textbf{Must}
+    & \textbf{2}
+    \\
+    \multicolumn{5}{p{0.98\linewidth}}{
+        This is trivial at present. Except in some instances, for reasons yet to be determined, a special Graphical Block needs to be used with a fake parameter, hidden from the player, that does nothing. As a result of this hack, it is not eligible for a score of 3.
+    }
+    \\ \\ \\
+    \textbf{CR-17.3.2}
+    & \textbf{--} & \textbf{One parameter, numerical or text.}
+    & \textbf{Must}
+    & \textbf{2}
+    \\
+    \multicolumn{5}{p{0.98\linewidth}}{
+        This is trivial at present. Except, all parameters are handled as strings. This is less efficient, which prevents this from getting a score of 3.
+    }
+    \\ \\
+    \textbf{CR-17.3.3}
+    & \textbf{--} & \textbf{Two parameters, numerical or text.}
+    & \textbf{Should}
+    & \textbf{2}
+    \\
+    \multicolumn{5}{p{0.98\linewidth}}{
+        Same as CR-17.3.2.
+    }
+    \\ \\
+    \textbf{CR-17.3.4}
+    & \textbf{--} & \textbf{Any number of parameters}
+    & \textbf{Could}
+    & \textbf{2}
+    \\
+    \multicolumn{5}{p{0.98\linewidth}}{
+        Beyond parameters universally getting handled as strings, there is no UI block at present that can handle endless parameters. Building blocks are in place to create new blocks for any number of parameters, but this is not sufficient for a score of 3.
+    }
+    \\ \\
+    \textbf{CR-17.4}
+    & \multicolumn{2}{l}{\textbf{The following functions:}}
+    & \textbf{--}
+    & \textbf{--}
+    \\
+    \textbf{CR-17.4.1}
+    & \textbf{--} & \textbf{\texttt{print(text)}}
+    & \textbf{Must}
+    & \textbf{3}
+    \\
+    \textbf{CR-17.4.2}
+    & \textbf{--} & \textbf{\texttt{print2(text1,text2)}}
+    & \textbf{Must}
+    & \textbf{3}
+    \\
+    \textbf{CR-17.4.3}
+    & \textbf{--} & \textbf{\texttt{isButtonPressed(...)}}
+    & \textbf{Should}
+    & \textbf{3}
+    \\
+    \textbf{CR-17.4.4}
+    & \textbf{--} & \textbf{\texttt{isJustButtonPressed(...)}}
+    & \textbf{Should}
+    & \textbf{3}
+    \\
+    \textbf{CR-17.4.5}
+    & \textbf{--} & \texttt{jump()}, \texttt{move()}, \texttt{swipe()} etc.
+    & \textbf{Should}
+    & \textbf{3}
+    \\
+    \textbf{CR-17.4.6}
+    & \textbf{--} & \texttt{isGrounded()}, \texttt{canSwipe()} etc.
+    & \textbf{Could}
+    & \textbf{3}
+    \\ \\
+    \textbf{CR-17.5}
+    & \multicolumn{2}{l}{\textbf{Boolean logic (\texttt{and}, \texttt{or}, and \texttt{not}).}}
+    & \textbf{Could}
+    & \textbf{2}
+    \\
+    \multicolumn{5}{p{0.98\linewidth}}{
+        This is present, elusively through graphical cat code. However, more rigorous testing needs to be performed to verify that the boolean logic implemented works flawlessly.
+    }
+    \\ \\
+    \textbf{CR-17.6}
+    & \multicolumn{2}{l}{\textbf{Variables.}}
+    & \textbf{Won't}
+    & \textbf{1}
+    \\
+    \multicolumn{5}{p{0.98\linewidth}}{
+        It is not clear how variables would be implemented, nor what form they would take.
+    }
+    \\ \\
+    \textbf{CR-17.7}
+    & \multicolumn{2}{l}{\textbf{User defined functions.}}
+    & \textbf{Won't}
+    & \textbf{0}
+    \\
+    \multicolumn{5}{p{0.98\linewidth}}{
+        To implement user-created functions, we would have to completely rework the algorithm for interpreting CatCode. The form this will take would depend heavily on what form user created functions will take, but what it clear is that it will be a significiant amount of work, with a high risk of having to returnign to the drawing board.
+    }
+    \\
+    \bottomrule
+  \end{longtable}
+\end{center}

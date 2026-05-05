@@ -1,0 +1,124 @@
+
+\begin{center}
+  \begin{longtable}{lp{0.5cm}p{7cm}rc}
+    \caption{Evaluation of CatCode features summarised} \label{tab:results/cr/catCode-features} \\
+    \toprule
+    ID
+    & \multicolumn{2}{l}{Requirement}
+    & Priority
+    & \textbf{Score} \\ \midrule
+    \endfirsthead
+    \toprule
+    ID
+    & \multicolumn{2}{l}{Requirement}
+    & Priority
+    & \textbf{Score}\\ \midrule
+    \endhead
+    CR-17.1
+    & \multicolumn{2}{l}{Execute pre-defined functions in sequence.}
+    & Must
+    & \textbf{3}
+    \\
+    CR-17.2
+    & \multicolumn{2}{l}{Structural elements:}
+    & \textbf{--}
+    & \textbf{--}
+    \\
+    CR-17.2.1
+    & -- & Basic selection (\texttt{if})
+    & Should
+    & \textbf{3}
+    \\
+    CR-17.2.2
+    & -- & Complex selection (\texttt{else}, and \texttt{elif})
+    & Could
+    & \textbf{3}
+    \\
+    CR-17.2.3
+    & -- & Basic definite iteration (\texttt{repeat})
+    & Could
+    & \textbf{3}
+    \\
+    CR-17.2.4
+    & -- & Complex iteration (\texttt{for}, and \texttt{while})
+    & Won't
+    & \textbf{1}
+    \\
+    CR-17.3
+    & \multicolumn{2}{l}{Predefined functions with:}
+    & \textbf{--}
+    & \textbf{--}
+    \\
+    CR-17.3.1
+    & -- & No parameters
+    & Must
+    & \textbf{2}
+    \\
+    CR-17.3.2
+    & -- & One parameter, numerical or text.
+    & Must
+    & \textbf{2}
+    \\
+    CR-17.3.3
+    & -- & Two parameters, numerical or text.
+    & Should
+    & \textbf{2}
+    \\
+    CR-17.3.4
+    & -- & Any number of parameters
+    & Could
+    & \textbf{2}
+    \\
+    CR-17.4
+    & \multicolumn{2}{l}{The following functions:}
+    & \textbf{--}
+    & \textbf{--}
+    \\
+    CR-17.4.1
+    & -- & \texttt{print(text)}
+    & Must
+    & \textbf{3}
+    \\
+    CR-17.4.2
+    & -- & \texttt{print2(text1,text2)}
+    & Must
+    & \textbf{3}
+    \\
+    CR-17.4.3
+    & -- & \texttt{isButtonPressed(...)}
+    & Should
+    & \textbf{3}
+    \\
+    CR-17.4.4
+    & -- & \texttt{isJustButtonPressed(...)}
+    & Should
+    & \textbf{3}
+    \\
+    CR-17.4.5
+    & -- & \texttt{jump()}, \texttt{move()}, \texttt{swipe()} etc.
+    & Should
+    & \textbf{3}
+    \\
+    CR-17.4.6
+    & -- & \texttt{isGrounded()}, \texttt{canSwipe()} etc.
+    & Could
+    & \textbf{3}
+    \\
+    CR-17.5
+    & \multicolumn{2}{l}{Boolean logic (\texttt{and}, \texttt{or}, and \texttt{not}).}
+    & Could
+    & \textbf{2}
+    \\
+    CR-17.6
+    & \multicolumn{2}{l}{Variables.}
+    & Won't
+    & \textbf{1}
+    \\
+    CR-17.7
+    & \multicolumn{2}{l}{User defined functions.}
+    & Won't
+    & \textbf{0}
+    \\
+    \bottomrule
+  \end{longtable}
+\end{center}

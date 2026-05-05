@@ -1,0 +1,148 @@
+\begin{center}
+  \begin{longtable}{lp{9.6cm}rc}
+    \caption{Evaluation of the Core Requirements summarised} \label{tab:results/cr/general} \\
+    \toprule
+    ID
+    & Requirement
+    & Priority
+    & \textbf{Score}\\ \midrule
+    \endfirsthead
+    \toprule
+    ID
+    & Requirement
+    & Priority
+    & \textbf{Score}\\ \midrule
+    \endhead
+    CR-01
+    & Controls must be responsive.
+    & Must
+    & \textbf{3*}
+    \\
+    CR-02
+    & CatCode must be able to interface directly with CatBot.
+    & Must
+    & \textbf{3}
+    \\ 
+    CR-03
+    & There must be a configurable mechanism in place for Auto Controlling (non-player implemented control system) CatBot.
+    & Must
+    & \textbf{3}
+    \\
+    CR-04
+    & Implementation of configurable controls.
+    & Won't
+    & \textbf{3*}
+    \\ 
+    CR-05
+    & Any GUI should be easy to read an intuitive.
+    & Should
+    & \textbf{2*}
+    \\
+    CR-06
+    & When auto-controlled, CatBot will have the expected features for a platformer player described in \autoref{tab:results/cr/autoCatFeatures}.
+    & \textbf{--}
+    & \textbf{--}
+    \\
+    CR-07
+    & When auto-controlled, CatBot's movement should be responsive, fluid, and enjoyable in isolation.
+    & Should
+    & \textbf{3*}
+    \\
+    CR-08
+    & Movement (including abilities) could also be fluid and fun when using CatCode.
+    & Could
+    & \textbf{2*}
+    \\
+    CR-09
+    & There must be a simple mechanism for setting allowed CatCode blocks in the Godot editor, per level.
+    & Must
+    & \textbf{3}
+    \\
+    CR-10
+    & It should be possible to add new Logic Blocks without reconfiguring CatCode's architecture nor significant effort on the developer's end. 
+    & Should
+    & \textbf{3}
+    \\
+    CR-11
+    & It should be possible to add new Graphical Blocks without reconfiguring CatCode's architecture nor significant effort on the developer's end. 
+    & Should
+    & \textbf{3}
+    \\
+    CR-12
+    & The implementation of the Runner, Code Editor, and Output should be separable and interchangeable.
+    & Should
+    & \textbf{2}
+    \\
+    CR-13
+    & There could be a system for managing the camera beyond it following the player. This could include modifying the camera's zoom or position when in a field.
+    & Could
+    & \textbf{2}
+    \\
+    CR-14
+    & CatCode, in whatever player-facing form it takes in the final game, should not be able to crash the game.
+    & Should
+    & \textbf{2}
+    \\
+    CR-15
+    & Invalid parameters must not be able to crash the game, and should create an in-game error.
+    & Must
+    & \textbf{2}
+    \\
+    CR-16
+    & The player should be able to able to recreate all of the auto-controlled mechanics. Individual priorities shown in \autoref{tab:results/cr/autoCatFeaturesInCatCode}.
+    & \textbf{--}
+    & \textbf{--}
+    \\
+    CR-17
+    & CatCode should feature have the features typically found in proper programming languages shown in \autoref{tab:results/cr/catCode-features}.
+    & \textbf{--}
+    & \textbf{--}
+    \\
+    CR-18
+    & There could be a GUI version of CatCode, called Graphical CatCode.
+    & Could
+    & \textbf{2}
+    \\
+    CR-19
+    & When in-game errors occur, it must be clear what went wrong and how to fix it.
+    & Must
+    & \textbf{2*}
+    \\
+    CR-20
+    & It should be clear in-game what every block does.
+    & Should
+    & \textbf{2}
+    \\
+    CR-21
+    & Adding blocks to a script should be intuitive and easy, either through drag-and-drop or within two clicks.
+    & Should
+    & \textbf{3*}
+    \\
+    CR-22
+    & Deleting blocks from a script should be intuitive and easy, either through drag-and-drop or within two clicks.
+    & Should
+    & \textbf{3*}
+    \\
+    CR-23
+    & Reordering blocks in a script should be intuitive and easy, either through drag-and-drop or within two clicks.
+    & Should
+    & \textbf{0*}
+    \\
+    CR-24
+    & Compiling CatCode should be perceptively instant.
+    & Should
+    & \textbf{3}
+    \\
+    CR-25
+    & The game should run at a consistent frame-rate on all hardware.
+    & Should
+    & \textbf{2}
+    \\
+    CR-26
+    & CatCode (and all other systems) should not be susceptible to memory leaks.
+    & Should
+    & \textbf{2}
+    \\
+    \bottomrule
+  \end{longtable}
+\end{center}

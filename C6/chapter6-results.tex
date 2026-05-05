@@ -22,11 +22,11 @@ Development of the prototype did not go according to plan. This is because the p
 \subsection{Requirements Analysis}\label{sec:results/reqAnalysis}
 Most of the requirements listed are fairly intuitive for evaluation by the developer. However, many would have been better evaluated through user testing as originally planned. Due to time constraints these have been evaluated by the developer only. These requirements are denoted with an asterisk.
 
-Each requirement has been given a score, according to the criteria summarised in \autoref{tab:results/passCriteria}. The results are listed in \autoref{tab:results/cr/general}, \ref{tab:results/cr/autoCatFeatures}, \ref{tab:results/cr/autoCatFeaturesInCatCode}, and \ref{tab:results/cr/catCode-features}.
+Each requirement has been given a score, according to the criteria summarised in \autoref{tab:results/passCriteria}. The results are listed in \autoref{tab:results/cr/general}, \ref{tab:results/cr/autoCatFeatures}, \ref{tab:results/cr/autoCatFeaturesInCatCode}, and \ref{tab:results/cr/catCode-features}. The full report, including justifications, can be found in \autoref{app:fullReqAnalysis}.
 
 To calculate a final score, a weighted total of each of Core Requirement's scores is taken. The weights are applied according to the priority. Then, to convert this to a percentage, this number divided by the maximum possible number of points. The details of this calculation are shown in \autoref{ReqAnalysisResults}.
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \begin{subfigure}[t]{0.5\linewidth}
     \centering
@@ -49,11 +49,17 @@ To calculate a final score, a weighted total of each of Core Requirement's score
     \\ \bottomrule\end{tabular}
     \subcaption{Scores for \textquote{Won't} requirements.}
   \end{subfigure}
-  \caption[Requirement analysis score definitions]{Requirement analysis score definitions.}
+  \caption[Requirement analysis score definitions]{Requirement analysis score definitions. More detail can be found in \autoref{app:fullReqAnalysis}.}
   \label{tab:results/passCriteria}
 \end{figure}
 
-\input{C6/chapter6-results-requirementEval}
+\input{C6/chapter6-results-table-1}
+
+\input{C6/chapter6-results-table-2}
+
+\input{C6/chapter6-results-table-3}
+
+\input{C6/chapter6-results-table-4}
 
 \begin{table}[H]
     \centering
@@ -66,7 +72,7 @@ To calculate a final score, a weighted total of each of Core Requirement's score
         \textbf{Won't}  &  7 &  12 &  21 & x 1   &  12 &  21 & 57\% \\ \hline
         \textbf{Total}  & 53 & 129 & 159 &   --- & 196 & 240 & \textbf{81\%} \\ \hline
     \end{tabular}
-    \caption{Caption}
+    \caption{Core Requirement analysis score and calculation}
     \label{ReqAnalysisResults}
 \end{table}
 

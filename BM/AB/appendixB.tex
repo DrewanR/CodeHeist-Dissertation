@@ -1,0 +1,85 @@
+% =============================================================================
+% Appendix: Supplementary Material
+% =============================================================================
+% SPDX-FileCopyrightText: 2026 Drewan Rutherford <RutherfordD@cardiff.ac.uk>
+% SPDX-License-Identifier: LPPL-1.3c
+% =============================================================================
+
+This appendix contains the full requirement analysis conducted on the Code Heist Prototype for \autoref{sec:results/reqAnalysis} of \autoref{ch6:results} \nameref{ch6:results}, including justification. It uses the Core Requirements listed in \autoref{sec:requirements/core} of \autoref{ch4:requirements} \nameref{ch4:requirements}. It should be noted that this process, especially for subjective requirements, was deliberately harsh.
+
+\section{Score Definitions}
+
+When defining scores it was decided that the baseline for success is an getting an average above 75\%, as a result of this, most requirements should be getting an \textquote{unambiguous pass}, with some leeway for \textquote{marginal passes}.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.5\linewidth}
+    \centering
+    \begin{tabular}{cp{0.8\linewidth}}\toprule
+        3 & Unambiguous pass \\
+        2 & Marginal pass \\
+        1 & Failure, with possible future implementation \\
+        0 & Failure, without easy future implementation
+    \\ \bottomrule\end{tabular}
+    \subcaption{Scores for \textquote{Must}, \textquote{Should}, and \textquote{Could} requirements.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.45\linewidth}
+    \centering
+    \begin{tabular}{cp{0.8\linewidth}}\toprule
+        3 & Trivial future implementation \\
+        2 & Possible future implementation \\
+        1 & Unknown \\
+        0 & Impossible to implement in the future
+    \\ \bottomrule\end{tabular}
+    \subcaption{Scores for \textquote{Won't} requirements.}
+  \end{subfigure}
+  \caption[Requirement analysis score definitions]{Requirement analysis score definitions.}
+  \label{tab:app-results/passCriteria}
+\end{figure}
+
+\subsection{Must, Should, and Could Requirements}
+
+\paragraph{Unambiguous pass (3 Points):} A requirement was considered to be unambiguously passes when there was no ambiguity over whether it passed, and the feature was subjectively considered to be high quality. Most of the requirements were binary, so this was common.
+
+\paragraph{Marginal pass (2 Points):} All requirements that were technically fulfilled, had some ambiguity or pass marginally, but did not fall into the above category fell into this one. These were not desired. Subjective requirements were more likely to fall into this category due to the harsh evaluation.
+
+\paragraph{Failure, with possible future implementation (1 Point):} This category was reserved for marginally failures or failures that could be corrected in the future. Possible future implementation was defined as being possible if the feature could be added without significant restructuring of the codebase or effort. If there was any significant doubt over the plausibility of future implementation, it would fall into the next category.
+
+\paragraph{Failure, without easy future implementation (0 points):} This was the category that requirements fell into if non of the above categories were true.
+
+\subsection{Won't Requirements}
+
+It was understood early on that \textquote{Won't} requirements may be implemented at a later date, hence why consideration was given to these. To prevent these getting implemented too soon, no credit was given if they were fulfilled beyond the 3 points for future implementation.
+
+\paragraph{Trivial future implementation (3 Points):} This score was given if it was clear immediately how the feature would be implemented and this process would not require any significant new systems or restructuring.
+
+\paragraph{Possible future implementation (2 Points):} This score was given if it was somewhat clear how a feature would be added in the future, but it may take longer or require minor rewriting or new systems to be added.
+
+\paragraph{Unknown (1 Point):} This was a catch-all for features were it was not clear how they would be added in the future but it was not likely to fall into the next category
+
+\paragraph{Impossible to implement in the future (0 Points):} This scores was given if it was suspected that the specified feature would not be possible to implement in the future without significant restructuring of existing systems. When in doubt, 1 point was rewarded instead of this category.
+
+\section{Analysis}
+
+\input{BM/AB/appendixB-Table01}
+\input{BM/AB/appendixB-Table02}
+\input{BM/AB/appendixB-Table03}
+\input{BM/AB/appendixB-Table04}
+
+\section{Results}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|cc|c|cc|c|}\hline
+        \textbf{Priority}& \textbf{Number}& \multicolumn{2}{c|}{\textbf{Score}} & \textbf{Weight}& \multicolumn{2}{c|}{\textbf{Weighted Score}}&\textbf{Percentage}\\
+        & & Result & Max & & Result & Max & \\\hline
+        \textbf{Must}   & 14 &  39 &  42 & x 2   &  78 &  84 & 93\% \\
+        \textbf{Should} & 23 &  56 &  72 & x 1.5 &  84 & 108 & 78\% \\
+        \textbf{Could}  &  9 &  22 &  27 & x 1   &  22 &  27 & 81\% \\
+        \textbf{Won't}  &  7 &  12 &  21 & x 1   &  12 &  21 & 57\% \\ \hline
+        \textbf{Total}  & 53 & 129 & 159 &   --- & 196 & 240 & \textbf{81\%} \\ \hline
+    \end{tabular}
+    \caption{Core Requirement analysis score and calculation}
+    \label{tab:App-ReqAnalysisResults}
+\end{table}

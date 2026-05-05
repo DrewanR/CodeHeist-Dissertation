@@ -1,0 +1,259 @@
+\begin{center}
+  \begin{longtable}{lp{9.6cm}rc}
+    \caption[Full evaluation of Core Requirements]{Full analysis of the core requirements. An Asterisk denotes a requirement that should have been analysed through user testing.} \label{tab:resultsFull/cr/general} \\
+    \toprule
+    \textbf{ID}
+    & \textbf{Requirement}
+    & \textbf{Priority}
+    & \textbf{Score} \\
+    \multicolumn{4}{l}{
+        Justification
+    }
+    \\\midrule
+    \endfirsthead
+    \toprule
+    \textbf{ID}
+    & \textbf{Requirement}
+    & \textbf{Priority}
+    & \textbf{Score} \\
+    \multicolumn{4}{l}{
+        Justification
+    }
+    \\\midrule
+    \endhead
+    \textbf{CR-01}
+    & \textbf{Controls must be responsive.}
+    & \textbf{Must}
+    & \textbf{3*}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Subjective pass: when tested by the developer, the controls had no perceivable input lag and did not break, even when put under challenging conditions such as multiple actions getting spammed synonymously.\newline
+    }
+    \\
+    \textbf{CR-02}
+    & \textbf{CatCode must be able to interface directly with CatBot.}
+    & \textbf{Must}
+    & \textbf{3}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Pass: CatCode is able to directly and fully control CatBot.
+    }
+    \\ \\
+    \textbf{CR-03}
+    & \textbf{There must be a configurable mechanism in place for Auto Controlling (non-player implemented control system) CatBot.}
+    & \textbf{Must}
+    & \textbf{3}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Pass: Nodes, such as \textquote{JumpAutocontroller} can be added to CatBot in the Godot editor, which will handle controlling CatBot.
+    }
+    \\ \\
+    \textbf{CR-04}
+    & \textbf{Implementation of configurable controls.}
+    & \textbf{Won't}
+    & \textbf{3*}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Should be possible: All input is handled through Godot's \texttt{Input} class. This reads from \texttt{project.godot}, which is configurable within the editor. Methods exist to implement in game menus to modify this. All this means, that the current systems should not need to be modified and implementing further would be beyond the scope of the Core Systems, hence the top score.
+    }
+    \\ \\ 
+    \textbf{CR-05}
+    & \textbf{Any GUI should be easy to read an intuitive.}
+    & \textbf{Should}
+    & \textbf{2*}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Marginal pass: It was beyond the scope of the Core Systems to customise the block's appearance beyond Godot's default GUI tools. Subjectively, the UI is readable, somewhat intuitive. To us, the GUI is not to a standard of an unambiguous pass, but is not at the point where it would be a failure either. User evaluation will be needed.
+    }
+    \\ \\
+    \textbf{CR-06}
+    & \textbf{When auto-controlled, CatBot will have the expected features for a platformer player described in \autoref{tab:coreRequirements/autoCatFeatures}}.
+    & \textbf{--}
+    & \textbf{--}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        View \autoref{tab:resultsFull/cr/autoCatFeatures}.
+    }
+    \\ \\
+    \textbf{CR-07}
+    & \textbf{When auto-controlled, CatBot's movement should be responsive, fluid, and enjoyable in isolation.}
+    & \textbf{Should}
+    & \textbf{3*}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Subjective pass: To the developer, the movement felt fluid and responsive. The developer, on multiple occasions, got distracted playing around in the test level implying that the physics fulfil the \textquote{enjoyable in isolation} criteria. However, user testing would be required for this to be an unambiguous pass.
+    }
+    \\ \\
+    \textbf{CR-08}
+    & \textbf{Movement (including abilities) could also be fluid and fun when using CatCode.}
+    & \textbf{Could}
+    & \textbf{2*}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Subjective pass: For the most part, this was similar to CR-07, except for jumping. Variable height jumping could not be replicated. This made the controls feel significantly less responsive.
+    }
+    \\ \\
+    \textbf{CR-09}
+    & \textbf{There must be a simple mechanism for setting allowed CatCode blocks in the Godot editor, per level.}
+    & \textbf{Must}
+    & \textbf{3}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Unambiguous pass: Similar to auto-controllers, nodes can be dragged onto CatBot's code manager to control what blocks the player had access to.
+    }
+    \\ \\
+    \textbf{CR-10}
+    & \textbf{It should be possible to add new Logic Blocks without reconfiguring CatCode's architecture nor significant effort on the developer's end. }
+    & \textbf{Should}
+    & \textbf{3}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        As mentioned in the \autoref{app:developerReport} \nameref{app:developerReport}, this was testing under challenging conditions using the implementation of \texttt{and}, \texttt{not}, and \texttt{or}, where it was done in a small amount of time, without any restructuring, and a minimal amount of new code, showing that this requirement is fulfilled.
+    }
+    \\ \\
+    \textbf{CR-11}
+    & \textbf{It should be possible to add new Graphical Blocks without reconfiguring CatCode's architecture nor significant effort on the developer's end. }
+    & \textbf{Should}
+    & \textbf{3}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Same as CR-10.
+    }
+    \\ \\
+    \textbf{CR-12}
+    & \textbf{The implementation of the Runner, Code Editor, and Output should be separable and interchangeable.}
+    & \textbf{Should}
+    & \textbf{2}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Unambiguous pass: The runner (code manager and cat threads), code editor, and output were all developed separately. Both the code manager and output devices were also changed mid-way through development with multiple different system co-existing in the prototype with no issues.
+    }
+    \\ \\
+    \textbf{CR-13}
+    & \textbf{There could be a system for managing the camera beyond it following the player. This could include modifying the camera's zoom or position when in a field.}
+    & \textbf{Could}
+    & \textbf{2}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Unambiguous pass: this system is implemented using the \textquote{managedCamera} and \textquote{cameraManager} node. This system is used in all test levels, though fields are always used. Slide 5 of the survey build (\texttt{res://levels/surveyLevels/slide5}) is a good example of the fields in use.
+    }
+    \\ \\
+    \textbf{CR-14}
+    & \textbf{CatCode, in whatever player-facing form it takes in the final game, should not be able to crash the game.}
+    & \textbf{Should}
+    & \textbf{2}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Pass: We did not experience any crashes whilst testing the final system, more rigorous testing would be required to verify this requirement under all conditions. 
+    }
+    \\ \\ \\
+    \textbf{CR-15}
+    & \textbf{Invalid parameters must not be able to crash the game, and should create an in-game error.}
+    & \textbf{Must}
+    & \textbf{2}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Pass: All functions implemented so far are resident to invalid parameters by their design. However, as present all parameters are pass as strings, which is not ideal. Due to the GUI it is also extremely difficult to give invalid parameters. More testing on erroneous data should be performed however, as well as user testing.
+    }
+    \\ \\
+    \textbf{CR-16}
+    & \textbf{The player should be able to able to recreate all of the auto-controlled mechanics. Individual priorities shown in \autoref{tab:coreRequirements/autoCatFeaturesInCatCode}.}
+    & \textbf{--}
+    & \textbf{--}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        View table. 
+    }
+    \\ \\
+    \textbf{CR-17}
+    & \textbf{CatCode should feature have the features typically found in proper programming languages shown in \autoref{tab:coreRequirements/catCode-features}.}
+    & \textbf{--}
+    & \textbf{--}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        View table.
+    }
+    \\ \\
+    \textbf{CR-18}
+    & \textbf{There could be a GUI version of CatCode, called Graphical CatCode.}
+    & \textbf{Could}
+    & \textbf{2}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Pass: A GUI version of CatCode was created. However, the GUI version is not to the standard that was expected.
+    }
+    \\ \\
+    \textbf{CR-19}
+    & \textbf{When in-game errors occur, it must be clear what went wrong and how to fix it.}
+    & \textbf{Must}
+    & \textbf{2*}
+    \\\multicolumn{4}{p{0.98\linewidth}}{
+        Partial pass: In-game errors are produced, however user testing would be required to determine whether the messages are sufficient to show that an error has occurred and enough to aid with the player fixing them.
+    }
+    \\ \\
+    \textbf{CR-20}
+    & \textbf{It should be clear in-game what every block does.}
+    & \textbf{Should}
+    & \textbf{2}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Partial subjective pass: There is a system that displays descriptions for in-game blocks and functions; however user testing would be required to determine whether this is sufficient to make it clear what everything does.
+    }
+    \\ \\
+    \textbf{CR-21}
+    & \textbf{Adding blocks to a script should be intuitive and easy, either through drag-and-drop or within two clicks.}
+    & \textbf{Should}
+    & \textbf{3*}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Subjective unambiguous pass: There is an add block button that adds new blocks within two clicks. User testing would be required to verify this; however, due to the specific nature of this requirement, it was determined that this would reduce its degree of success.
+    }
+    \\ \\ \\
+    \textbf{CR-22}
+    & \textbf{Deleting blocks from a script should be intuitive and easy, either through drag-and-drop or within two clicks.}
+    & \textbf{Should}
+    & \textbf{3*}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Partial subjective pass: It is possible to delete any block with a single right-click. Similar to CR-21, user testing would be required to verify this; however, due to the specific nature of this requirement, it was determined that this would reduce its degree of success.
+    }
+    \\ \\
+    \textbf{CR-23}
+    & \textbf{Reordering blocks in a script should be intuitive and easy, either through drag-and-drop or within two clicks.}
+    & \textbf{Should}
+    & \textbf{0*}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Failure: There is no simple mechanism to re-order blocks in the prototype except for replacing them.
+    }
+    \\ \\
+    \textbf{CR-24}
+    & \textbf{Compiling CatCode should be perceptively instant.}
+    & \textbf{Should}
+    & \textbf{3}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Unambiguous pass: When dealing with normal data up to 30 blocks long (longer than scripts will realistically be), on multiple different computers, there was no delay in compiling CatCode. 
+    }
+    \\ \\
+    \textbf{CR-25}
+    & \textbf{The game should run at a consistent frame-rate on all hardware.}
+    & \textbf{Should}
+    & \textbf{2}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Subjective pass: On out computers, this was the case; however, it needs to be tested on more computers.
+    }
+    \\ \\
+    \textbf{CR-26}
+    & \textbf{CatCode (and all other systems) should not be susceptible to memory leaks.}
+    & \textbf{Should}
+    & \textbf{2}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Subjective pass: When monitoring using Godot's built in tools, no memory leaks were occurring. But, more granular analysis needs to occur to verify this. 
+    }
+    \\
+    \bottomrule
+  \end{longtable}
+\end{center}
