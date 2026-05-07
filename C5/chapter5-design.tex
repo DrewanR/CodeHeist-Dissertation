@@ -38,36 +38,7 @@ Stylistically, this game uses pixel art in combination with full resolution UI. 
 
 \section{CatBot}\label{sec:design/catBot}
 
-The character controlled by the player is CatBot: a robot that looks like the cat, that has a failing control system that constants needs fixing. A cat was chosen as a combination for a few reasons. First, the developer is good, and enjoys, drawing cats. Second, cats are popular companions with an estimated 10.2 million pet cats in the UK \citep{CatOwnership}. And, finally, but more importantly, the developer had an existing sprite-sheet, shown in  that could be re-used, alongside an existing system that could be used as a base.
-
-\begin{figure}
-    \centering
-    \begin{subfigure}[t]{0.45\linewidth}
-        \centering
-        \includegraphics[width=1\linewidth]{C5/CatBot/Jumping.png}
-        \caption{CatBot jumping}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.45\linewidth}
-        \centering
-        \includegraphics[width=0.75\linewidth]{C5/CatBot/SpriteSheet.png}
-        \caption{Sprite-sheet}
-    \end{subfigure}
-    \caption[CatBot and CatBot's sprite-sheet]{CatBot and CatBot's sprite-sheet, available in \texttt{res://assets/player/Kitis.png}. Only rows 1 -- 4 were used for CatBot.}
-    \label{fig:design/catBotSpriteSheet}
-\end{figure}
-
-CatBot (found in \texttt{res://src/entities/player/player\_cat.tcsn}), which extends the custom-made \texttt{generic\_entity} class (...\texttt{/classes/generic\_entity.gd}). \texttt{generic\_entity} provides basic functions such managing HP, stability, and typing\footnote{Godot default type methods only provide the node type. Providing this method as a base to all entities makes implementing future systems easier}; and, in turn, extends the built-in \href{https://docs.godotengine.org/en/stable/classes/class\_characterbody2d.html}{Character Body 2D} node. This provides numerous functions, such as \texttt{move\_and\_slide()}, and attributes such as \texttt{velocity} that aid with entities with custom dynamic physics.
-
-The structure of the CatBot scene is shown in \autoref{fig:design/catBot-NodeStructure}.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{C5//CatBot/nodeStructure.png}
-    \caption[CatBot node structure]{CatBot node structure}
-    \label{fig:design/catBot-NodeStructure}
-\end{figure}
-
-
+\input{C5/chapter5-catBot}
 
 \section{CatCode Back-end}\label{sec:design/catCodeBackend}
 
