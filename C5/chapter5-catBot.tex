@@ -38,6 +38,11 @@ Horizontal movement is handelled by adding \texttt{SPEED * direction * delta} to
     \begin{fullwidth}
     \begin{tcolorbox}[boxrule=0.25mm]
     \begin{verbatim}
+const SLIPMOD := 3.0
+const MAX_SPEED := 160.0
+...
+const FRICTION_CONST := 0.15/SLIPMOD
+...
 ## Handles horizontal physics
 func horizontal_physics(_delta: float, direction: float) -> void:
     var slipmod_adjustment := 1.0 if abs(direction) > 0 else SLIPMOD*0.75
@@ -55,10 +60,252 @@ Friction is more complex, using the \texttt{lerp()} function to allow for a non-
 
 Every frame \texttt{is\_on\_floor()} is false (meaning CatBot is in the air), the global gravity value (gotten using the method \texttt{get\_gravity()}) is \textit{added} to \texttt{velocity.y}\footnote{The y-axis is inverted in Godot's 2D engine.}. When this is true, \texttt{air\_time()} is increased by \texttt{delta}.
 
-To jump, we set \texttt{velocity.y} to \texttt{JUMP\_VELOCITY} if grounded. For the purposes of jumping, to improve the feel of movement, we have implemented Coyote inspired by \textbf{[Celeste TODO]}. This changed the condition to jump from \texttt{is\_on\_floor()} to \texttt{air\_time < COYOTE\_TIME}.
+To jump, we set \texttt{velocity.y} to \texttt{JUMP\_VELOCITY} if grounded. For the purposes of jumping, to improve the feel of movement, we have implemented Coyote-time inspired by Celeste \citep{Celeste} \citep{GameRant-CoyoteTime}. This changed the condition to jump from \texttt{is\_on\_floor()} to \texttt{air\_time < COYOTE\_TIME}.
+
+\paragraph{Swiping}
+
+This was added as a secondary action. When CatBot swipes -- endlessly whilst grounded, or up to \texttt{MAX\_AIR\_STRIKES} (2) in mid-air -- it gains a small impulse of velocity and spawns an attack node (implementation of this part is not relevant to this report). The pseudocode is shown in \autoref{fig:design/catBot-swipeFun}.
+
+\begin{figure}
+    \begin{tcolorbox}[boxrule=0.25mm]
+    \begin{verbatim}
+FUNC strike(direction):
+    IF (Cannot_strike):
+        Throw error
+    ELSE:
+        air_strikes ← air_strikes + 1
+        strike_cooldown ← STRIKE_COOLDOWN_COST
+
+        IF is_on_floor():
+            velocity ← STRIKE_VELOCITY * Vector2(
+                direction, 1 + get_direction_y()
+            )
+            air_entry ← 6
+            air_time ← 0
+        ELSE:
+            velocity = STRIKE_VELOCITY * Vector2(
+                direction*1.25, 1 + get_direction_y() * 0.75
+            )
+        ENDIF
+        add_attachment(strike_attachment_node)
+    ENDIF
+ENDFUNC
+    \end{verbatim}
+    \end{tcolorbox}
+    \caption{Swipe function (pseudocode)}
+    \label{fig:design/catBot-swipeFun}
+\end{figure}
 
 \subsection{Traditional Systems}\label{sec:design/CatBot/traditional}
 
+The original physics system was inspired by a previous system by the developer with some mechanics removed such as climbing, and then adapted. The structure and the constants\footnote{Hence why there are a few unused constants in case mechanics, such as climbing, were re-implemented later} were what remained. This system, as is typical for Godot, makes use of the \texttt{\_ready()} and \texttt{\_physics\_process(delta)} (which is similar to \texttt{\_process(delta)}).
+
+The \texttt{\_physics\_process()} function, which handles all the logic, does the following in order:
+
+\begin{enumerate}
+    \item[1.] Vertical logic
+        \subitem 1.1. Handles vertical calculations
+        \subitem 1.2. Handles jump logic
+    \item[2.] Horizontal logic
+        \subitem 2.1. Handles friction calculations
+        \subitem 2.2. Handles walking logic
+    \item[3.] Handles any other actions
+    \item[4.] Moves the node
+    \item[5.] Handles animations
+\end{enumerate}
+
+A flow chart showing this process is available in \autoref{fig:design/catBot-TraditionalFlow}, as well as the function itself in \autoref{fig:design/catBot-TraditionalProcFun}. This order of operations was maintained throughout.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{C5//CatBot/playerCatStage1_flowDiagram.png}
+    \caption{Flow chart showing the logic for a traditional platformer character}
+    \label{fig:design/catBot-TraditionalFlow}
+\end{figure}
+
+\begin{figure}
+    \begin{tcolorbox}[boxrule=0.25mm]
+    \begin{verbatim}
+func _physics_process(delta: float) -> void:
+    var direction := get_direction_x()
+    debug_text = ""
+    animation_state = 0
+    
+    # Air physics
+    calculate_airtime(delta)
+    vertical_physics(delta)
+    
+    # Handle jump
+    calculate_walktime(delta, direction)
+    jump_logic(delta)
+    
+    # Ground physics
+    running_logic(delta, direction)
+    horizontal_physics(delta, direction)
+    
+    # Other
+    strikes(delta, direction)
+    
+    previous_velocity = velocity
+    facing_right = velocity.x >= 0
+    move_and_slide()
+    
+    # Animations
+    flip_sprite(direction, false)
+    calculation_animation_state(direction, delta)
+    animation()
+    update_debug_text()
+    
+    # Sets velocity.x to 0 if it is low enough
+    velocity.x *= 1 if (abs(velocity.x) >= delta*5) else 0
+    
+    # Debug
+    if Input.is_action_just_pressed("debug_damage"):
+        damage(1)
+    if Input.is_action_just_pressed("debug_heal"):
+        heal(1)
+    \end{verbatim}
+    \end{tcolorbox}
+    \caption{Original \texttt{\_physics\_process()}, before control was extracted}
+    \label{fig:design/catBot-TraditionalProcFun}
+\end{figure}
+
 \subsection{Extracting the Controllers}\label{sec:design/CatBot/modularisation}
 
-\subsection{Instancing CatBot}\label{sec:design/CatBot/instancing}
+After the traditional player character was created, the control systems were removed from the node. This was when the player character became CatBot. In this process, nodes were created that can be instanced as children which would execute the actions instead of the CatBot node itself, an example of this node setup is in \autoref{fig:design/catBot-ModularisedNodes}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{C5/CatBot/playerCatStage2_nodeSetup.png}
+    \caption{Node setup of modularised CatBot with autocontrollers}
+    \label{fig:design/catBot-ModularisedNodes}
+\end{figure}
+
+Lets use the jumping as an example. Jumping was originally handled in its entirety by the \texttt{jump\_logic()} function. First, this was split into \texttt{jump(strength)}, which executed the jump and \texttt{jump\_logic()}, which would execute the \texttt{jump()} when appropriate. Then, \texttt{jump\_logic()} was moved over to the node \textquote{AutoJumpController} (\texttt{res://src/entities/player/autoControllers}), which would call the \texttt{jump()} function on its parent. Pseudocode for this process is shown in \autoref{fig:design/catBot-ModularisedFun}. The other auto-controllers use the same structure as shown in the class diagram in \autoref{fig:design/catBot-AutoController-ClassDiagram}.
+
+\begin{figure}[b]
+    \centering
+    \includegraphics[width=1\linewidth]{C5//CatBot/invalidJump.png}
+    \caption{Communication between nodes when an invalid jump is called}
+    \label{fig:design/invlidJumpCommunication}
+\end{figure}
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=1\linewidth]{C5//CatBot/playCatStage2_classDiagram.png}
+    \caption{Class diagram of auto-controllers}
+    \label{fig:design/catBot-AutoController-ClassDiagram}
+\end{figure}
+
+At this stage, custom error handling was added. The error checking was handled by CatBot in functions at time of execution. If something is not valid -- jumping whilst not grounded, for example -- the function wont execute and an error will be thrown updating the relevant variable and emitting the signal \texttt{major\_error\_occurred}. \autoref{fig:design/invlidJumpCommunication} depicts this scenario and \autoref{fig:design/finalJump} shows the final \texttt{jump()} function.
+
+\begin{figure}[H]
+    \begin{fullwidth}
+    \begin{tcolorbox}[boxrule=0.25mm]
+    \begin{verbatim}
+func jump(strength := 1.0) -> void:
+    # Checks for errors
+    if !(
+        # Checks that strength is valid
+        must_be_within_range(strength, -1.0, 1.0, "Jump strength") and
+        must_be_grounded("Jump") and # Checks if grounded
+        can_jump() # Back-up, legacy test
+    ):
+        return
+
+    # Preceding if none occur
+    else:
+        air_entry = 3
+        
+        # Modifies jump strength depending on if air hover is used, this is to
+        # prevent punishing players who do not use air hovers
+        if using_air_hover: air_time = 0 
+
+        velocity.y = JUMP_VELOCITY * strength * 0.95 if using_air_hover else [...]
+            JUMP_VELOCITY * strength * 1.1
+        first_ascent = true
+        return
+    \end{verbatim}
+    $\text{Note: \texttt{using\_air\_hover} is set in the editor to disable height adjustment by holding down jump.}$
+    \end{tcolorbox}
+    \end{fullwidth}
+    \caption{Final \texttt{jump()} function within CatBot}
+    \label{fig:design/finalJump}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[t]{0.55\linewidth}
+        \begin{tcolorbox}[boxrule=0.25mm]
+            \begin{verbatim}
+FUNC _process():
+    ...
+    jump_logic()
+    ...
+
+FUNC jump_logic():
+    IF jump key is pressed:
+        IF is_grouned():
+            # jump
+        END IF
+    ENDIF
+ENDFUNC
+            \end{verbatim}
+        \end{tcolorbox}
+        \subcaption{Original \texttt{catBot.jump\_logic()}}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\linewidth}
+        \begin{tcolorbox}[boxrule=0.25mm]
+            \begin{verbatim}
+FUNC _process():
+    ...
+    jump_logic()
+    ...
+
+FUNC jump_logic():
+    IF jump key is pressed:
+        parent.jump()
+    ENDIF
+ENDFUNC
+            \end{verbatim}
+        \end{tcolorbox}
+        \subcaption{Separated \texttt{catBot.jump()}}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\linewidth}
+        \begin{tcolorbox}[boxrule=0.25mm]
+            \begin{verbatim}
+FUNC _process():
+    ...
+    # No jump functions
+    ...
+
+FUNC jump():
+    IF is_grounded():
+        # Jump
+    ENDIF
+ENDFUNC
+            \end{verbatim}
+        \end{tcolorbox}
+        \subcaption{\texttt{autoJumpController.jump\_logic()}}
+    \end{subfigure}
+    \caption{Pseudocode of original and separated jump functions}
+    \label{fig:design/catBot-ModularisedFun}
+\end{figure}
+
+\subsection{Adding CatCode to CatBot}\label{sec:design/CatBot/instancing}
+
+CatCode was initially created in isolation, with this integration with CatBot in mind. As is standard with CatCode, a CodeManager is added as a child to the CatBot node. This CodeManager will then execute functions on its parent as appropriate (shown in). No modifications were needed to CatBot as, from its perspective, a CodeManager is indistinguishable from an autoController.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[t]{0.4875\linewidth}
+        \includegraphics[width=1\linewidth]{C5//CatBot/catBotExample.png}
+        \subcaption{Node setup}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\linewidth}
+        \includegraphics[width=1\linewidth]{C5//CatBot/catBotInstanceCodeManager.png}
+        \subcaption{CodeManager export variables}
+    \end{subfigure}
+    \caption[Example CatBot instance]{Example CatBot instance using a preconfigured instance.}
+    \label{fig:design/catBot-example-instance}
+\end{figure}

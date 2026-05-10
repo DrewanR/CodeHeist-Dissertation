@@ -1,0 +1,88 @@
+\begin{center}
+  \begin{longtable}{lllr}
+    \caption{CatCode Specification} \label{tab:catCodeSpec} \\
+    \toprule
+    \textbf{Name}
+    & \texttt{Reference}
+    & \texttt{Category}
+    & \textit{Parameters} \\
+    \multicolumn{4}{l}{
+        Description
+    }
+    \\\midrule
+    \endfirsthead
+    \toprule
+    \textbf{Name}
+    & \texttt{Reference}
+    & \texttt{Category}
+    & \textit{Parameters} \\
+    \multicolumn{4}{l}{
+        Description
+    }
+    \\\midrule
+    \endhead
+    \textbf{If}
+    & \texttt{if}
+    & \texttt{conditional}
+    & \textit{Condition (boolean operator)}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        SELECTIVE BLOCK.
+        Contains a boolean operator (view operator section).
+        The section indented beneath this block will be executed if the operator is true.
+        If the statement is not true, it will skip the section.
+    }
+    \\ \multicolumn{3}{l}{\textbf{Node:} \texttt{if\_conditional.tcsn}}
+    \\ \multicolumn{3}{l}{\textbf{Script:} \texttt{if\_conditional.gd}}
+    \\ \multicolumn{3}{l}{\textbf{UI:} \texttt{GB\_1\_Operand.tcsn}}
+    \\ \\
+    \textbf{Else if}
+    & \texttt{elif}
+    & \texttt{conditional}
+    & \textit{Condition (boolean operator)}
+    \\
+    \multicolumn{3}{l}{\textbf{Node:} \texttt{else\_if\_conditional.tcsn}}
+    & \textbf{Script:} \texttt{if\_conditional.gd}
+    \\
+    \multicolumn{3}{l}{\textbf{UI Block:} \texttt{GB\_1\_Operand.tcsn}}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        SELECTIVE BLOCK.
+        An if statement that will only be considered if none of the previous selective blocks are true.
+    }
+    \\ \\
+    \textbf{Else}
+    & \texttt{else}
+    & \texttt{conditional}
+    & \textit{--}
+    \\
+    \multicolumn{3}{l}{
+        \textbf{Node:} \texttt{else\_conditional.tcsn}
+    }
+    & Script: \texttt{if\_conditional.gd}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        SELECTIVE BLOCK.
+        The section indented after this block will only be executed if none of the previous selective blocks are true.
+    }
+    \\ \\
+    \textbf{Jump}
+    & \texttt{jump}
+    & \texttt{action}
+    & \textit{Strength (-1.0 < float < 1.0)}
+    \\
+    \multicolumn{3}{l}{
+        \textbf{Node:} \texttt{jump\_function.tcsn}
+    }
+    & Script: \texttt{jump\_function.gd}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Causes catbot to jump.
+        "Strength" controls the height of the job.
+        Will result in an error if used when CatBot isn't on the ground.
+    }
+    \\ \\
+    
+    \bottomrule
+  \end{longtable}
+\end{center}
