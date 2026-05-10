@@ -1,0 +1,192 @@
+\begin{fullwidthfigure}[h]
+    \centering
+    \caption{Back-end file structure of the catCode systems}
+    \begin{tabular}{|rllllp{11cm}|}\hline
+        & & \multicolumn{3}{l}{} &
+        \\
+        & \multicolumn{4}{l}{
+            \textbf{CatCode}
+        }
+        & \textit{\textbf{CatCode directory}}
+        \\
+        & > & \multicolumn{3}{l}{
+            \textbf{Classes} 
+        }
+        & \textit{\textbf{Contains all of the super-classes for CatCode}}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            boolean\_operator.gd 
+        }
+        & \textit{Super class for all boolean operators}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            conditional\_block.gd 
+        }
+        & \textit{Super class for selective blocks}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            function\_block.gd 
+        }
+        & \textit{Super class for generalised functions}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            instruction.gd 
+        }
+        & \textit{Class for instruction lines}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            iteration\_block.gd 
+        }
+        & \textit{Super class for iterative blocks}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            logic\_block.gd 
+        }
+        & \textit{Super class for catCode logical blocks}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            parameter\_component.gd 
+        }
+        & \textit{Super class for parameter block components}
+        \\
+        & > & \multicolumn{3}{l}{
+            \textbf{graphicalBlocks} 
+        }
+        & \textit{\textbf{Contains the UI blocks for Graphical CatCode}}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            boolean\_operand.gd/tscn
+        }
+        & \textit{Basic component for representing operands graphically}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            compoundOperand.gd
+        }
+        & \textit{Used for operand blocks, such as OP\_1\_operandContainer}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            graphical\_block.gd/tscn
+        }
+        & \textit{Generic class/node for graphical blocks}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            GB\_1\_operand.gd/tscn
+        }
+        & \textit{Generic class/node for graphical blocks with one parameter}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            GB\_\textbf{*}.tscn
+        }
+        & \textit{Node family for graphical block implementations}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            OP\_\textbf{*}.tscn
+        }
+        & \textit{Node family for graphical block implementation of operands}
+        \\
+        & > & \multicolumn{3}{l}{
+            \textbf{graphicalComponents} 
+        }
+        & \textit{\textbf{Contains building blocks for graphical blocks}}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            basic\_indent\_node.tscn
+        }
+        & \textit{Practically empty node for indenting Graphical CatCode}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            block\_auto\_identifier.gd/tscn
+        }
+        & \textit{A label that will automatically update to a block's name}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            \textbf{*}\_param.gd/tscn
+        }
+        & \textit{Node family for GUI representation of parameters}
+        \\
+        & & -- & \multicolumn{2}{l}{
+            operand\_container.gd/tscn
+        }
+        & \textit{Node for containing operand nodes}
+        \\
+        & > & \multicolumn{3}{l}{
+            \textbf{logicBlocks} 
+        }
+        & \textit{\textbf{Contains the logical, back-end nodes for CatCode}}
+        \\
+        & > & > & \multicolumn{2}{l}{
+            \textbf{nodes} 
+        }
+        & \textit{\textbf{Contains the nodes/scenes for the logic blocks}}
+        \\
+        & & & -- & \multicolumn{1}{l}{
+            \textbf{*}.tscn
+        }
+        & \textit{View \autoref{tab:catCodeSpec/logic} and \autoref{tab:catCodeSpec/op} for file associations}
+        \\
+        & > & > & \multicolumn{2}{l}{
+            \textbf{scripts} 
+        }
+        & \textit{\textbf{Contains scripts for scripts for logic blocks}}
+        \\
+        & & & -- & \multicolumn{1}{l}{
+            \textbf{*}.gd
+        }
+        & \textit{View \autoref{tab:catCodeSpec/logic} and \autoref{tab:catCodeSpec/op} for file associations}
+        \\
+        & > & \multicolumn{3}{l}{
+            \textbf{preconfigCCInstances} 
+        }
+        & \textit{\textbf{Contains codeManagers with blocks already added}}
+        \\
+        & & \multicolumn{3}{l}{...} &
+        \\
+        & & \multicolumn{3}{l}{} &
+        \\
+    \hline
+    \end{tabular}
+    \label{fig:catCodeSpec/files}
+\end{fullwidthfigure}
+
+\begin{fullwidth}
+\centering
+\begin{tabular}{|rllllp{11cm}|}\hline
+    & & \multicolumn{3}{l}{} &
+    \\
+    & & \multicolumn{3}{l}{...} &
+    \\
+    & > & \multicolumn{3}{l}{
+        \textbf{ui} 
+    }
+    & \textit{\textbf{Folder for all the GUI elements}}
+    \\
+    & & -- & \multicolumn{2}{l}{
+        basic\_graphical\_editor.gd/tscn
+    }
+    & \textit{Basic graphical cat code editor node}
+    \\
+    & & -- & \multicolumn{2}{l}{
+        basic\_output.gd/tscn
+    }
+    & \textit{Basic output node}
+    \\
+    & & -- & \multicolumn{2}{l}{
+        basic\_textual\_editor.gd/tscn
+    }
+    & \textit{Basic editor for text-based CatCode}
+    \\
+    & -- & \multicolumn{3}{l}{
+        cat\_code\_manager.gd/tscn
+    }
+    & \textit{Manages catCode and controls the execution of it}
+    \\
+    & -- & \multicolumn{3}{l}{
+        cat\_thread.gd/tscn
+    }
+    & \textit{The seperate runner for CatCode}
+    \\
+    & & \multicolumn{3}{l}{} &
+    \\
+\hline
+\end{tabular}
+\end{fullwidth}

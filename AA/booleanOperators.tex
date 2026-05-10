@@ -1,0 +1,114 @@
+\begin{center}
+  \begin{longtable}{lllr}
+    \caption{CatCode Specification: Boolean operators} \label{tab:catCodeSpec/op} \\
+    \toprule
+    \textbf{Name}
+    & \texttt{Reference}
+    & \texttt{Category}
+    & \textit{Parameters} \\
+    \multicolumn{4}{l}{
+        Description
+    }
+    \\\midrule
+    \endfirsthead
+    \toprule
+    \textbf{Name}
+    & \texttt{Reference}
+    & \texttt{Category}
+    & \textit{Parameters} \\
+    \multicolumn{4}{l}{
+        Description
+    }
+    \\\midrule
+    \endhead
+    
+    \textbf{And}
+    & \texttt{and}
+    & \texttt{logic}
+    & \textit{Op1, Op2 (Boolean Operators)}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Contains two operators.
+        Returns true if both operators are true.
+        This means that code indented beneath an if statement executes if both statements are true.
+    }
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        \textit{Not compatible with graphical CatCode.}
+    }
+    \\ \multicolumn{4}{l}{Node: \texttt{and\_operand.tcsn}}
+    \\ \multicolumn{4}{l}{Script: \texttt{and\_operand.gd}}
+    \\ \multicolumn{4}{l}{UI: \texttt{OP\_2\_operandContainers.tcsn}}
+    \\ \\
+
+    \textbf{<True/False>}
+    & \texttt{<true/false>}
+    & \texttt{value}
+    & \textit{--}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Represents a boolean value of <true/false>.
+    }
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        \textit{This block is used for True and False values. The exact value is set in the Godot editor before runtime and is two separate blocks as far as the player is concerned.}
+    }
+    \\ \multicolumn{4}{l}{Node: \texttt{boolean\_value.tcsn}}
+    \\ \multicolumn{4}{l}{Script: \texttt{boolean\_value.gd}}
+    \\ \multicolumn{4}{l}{UI: \texttt{basic\_operand.tcsn}}
+    \\ \\
+
+    \textbf{Can Swipe}
+    & \texttt{canSwipe}
+    & \texttt{physics logic}
+    & \textit{--}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Will return true if CatBot can swipe.
+    }
+    \\ \multicolumn{4}{l}{Node: \texttt{can\_strike\_operand.tcsn}}
+    \\ \multicolumn{4}{l}{Script: \texttt{can\_strike\_operand.gd}}
+    \\ \multicolumn{4}{l}{UI: \texttt{basic\_operand.tcsn}}
+    \\ \\
+
+    \textbf{Not}
+    & \texttt{not}
+    & \texttt{logic}
+    & \textit{Operand (Boolean Operator)}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Contains one operator.
+        Returns true if the operator is false.
+        True becomes false, and false becomes true, for example.
+    }
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        \textit{Unknown compatibility with graphical CatCode.}
+    }
+    \\ \multicolumn{4}{l}{Node: \texttt{not\_operand.tcsn}}
+    \\ \multicolumn{4}{l}{Script: \texttt{not\_operand.gd}}
+    \\ \multicolumn{4}{l}{UI: \texttt{OP\_1\_operandContainer.tcsn}}
+    \\ \\
+    
+    \textbf{Or}
+    & \texttt{or}
+    & \texttt{logic}
+    & \textit{Op1, Op2 (Boolean Operators)}
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        Contains two operators.
+        Returns true if either operator is true.
+        This means that code indented beneath an if statement executes if one statement is true.
+    }
+    \\
+    \multicolumn{4}{p{0.98\linewidth}}{
+        \textit{Not compatible with graphical CatCode.}
+    }
+    \\ \multicolumn{4}{l}{Node: \texttt{or\_operand.tcsn}}
+    \\ \multicolumn{4}{l}{Script: \texttt{or\_operand.gd}}
+    \\ \multicolumn{4}{l}{UI: \texttt{OP\_2\_operandContainers.tcsn}}
+    \\ \\
+    
+    \bottomrule
+  \end{longtable}
+\end{center}

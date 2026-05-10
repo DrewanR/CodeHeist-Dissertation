@@ -5,16 +5,82 @@
 % SPDX-License-Identifier: LPPL-1.3c
 % =============================================================================
 
-This appendix contains supplementary material: extra tables, derivations, or notation. Replace with your own content.
-
 \section{File Structure}
 
-\section{CatCode Specification}
+FIG Shows the back-end file structure of CatCode. All addresses are relative to \texttt{res://src} (project source files). For clarity, when the \texttt{.gd} and\texttt{.tscn} for a node script pair are in the same folder, it will be listed as \texttt{.gd/tscn}. Not all files are listed here.
 
-\subsection{Logic Blocks}
+\input{AA/fileStructure}
+
+\section{Logic Blocks}
 
 \input{AA/logicBlocks}
 
-\subsection{Boolean Operators}
+\section{Boolean Operators}
 
-\subsection{Help}
+\input{AA/booleanOperators}
+
+\break
+\section{Help Messages}
+
+These help messages are brought up by pressing the associated button the graphical CatCode editor. \textquote{Instruction Set}, which brings up an automatically generated list of the current instruction set of blocks and their descriptions, is not shown here.
+
+\begin{figure}[h]
+    \centering
+    \begin{tcolorbox}[boxrule=0.25mm]
+        CatCode+ is the graphical code editor, that created CatCode which controls the CatBot. \\
+        \phantom{-} \\
+        \textbf{What is catCode?} \\
+        CatCode consists of a sequence of blocks. Each of these are an instruction that the catBot will follow in order. For example, the "jump" block will make catBot execute the jump function. \\
+        \phantom{-} \\
+        Some blocks have values associated with them called parameters. When these functions are executed, the value specified by the parameter (or sometimes parameters) will affect how the catBot will react. For example, the strength parameter on "jump" will control how high the catBot will jump. \\
+        \phantom{-} \\
+        Experiment with these! Unlike CatCode-, it is hard to give catBot functions it can't handle using catCode+. \\
+        \phantom{-} \\
+        To view a list of instructions, their parameters and further explanations of the blocks click "Instruction set". \\
+        \phantom{-} \\
+        \textbf{How do I edit CatCode?} \\
+        To add a new block, click on the "+ add line" button. To remove a block, right click it. Click and drag blocks to reorder them. \\
+        \phantom{-} \\
+        \textbf{How do I add indent blocks?} \\
+        To add indent blocks, use the "<" and ">" buttons on it's line. \\
+        \phantom{-} \\
+        \textbf{Why do I indent blocks?} \\
+        Certain blocks, such as "if" will modify the behaviour of the blocks associated with it. Indent blocks are used to tell catBot what is beneath what. \\
+        \phantom{-} \\
+        When inserting a new line, the block will be inserted at the correct indent. \\
+        \phantom{-} \\
+        \textit{Click outside window to close}
+    \end{tcolorbox}
+    \caption[Help pop-up text]{"Help" pop-up text, taken from survey build}
+    \label{fig:catCodeSpec/help}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \begin{tcolorbox}[boxrule=0.25mm]
+        At present controls are hardwired.\\
+        If you need to remap controls, return to the coverpage and follow the unexported build instructions. These instructions will guide you through the process of installing godot, downloading the project and editing the controls. This will \textit{not} update catCode labelling.\\
+        \phantom{-} \\
+        \textbf{Controls}\\
+        Z-Button: \textit{Z}\\
+        X-Button: \textit{X}\\
+        \phantom{-} \\
+        Up: \textit{Up arrow key}\\
+        Down: \textit{Down arrow key}\\
+        left: \textit{Left arrow key}\\
+        Right: \textit{Right arrow key}\\
+        \phantom{-} \\
+        Delete block: \textit{Right click}\\
+        \phantom{-} \\
+        It is up to you what each of the above keys do, however when relying on the autocontrollers, the following keybinds are used:\\
+        \phantom{-} \\
+        \textbf{Auto keybindings}\\
+        Z-Button: \textit{Jump}\\
+        X-Button: \textit{Strike/Swipe}\\
+        Arrow keys: \textit{Movement}\\
+        \phantom{-} \\
+        \textit{Click outside window to close}
+    \end{tcolorbox}
+    \caption[Controls pop-up text]{"Controls" pop-up text, taken from survey build}
+    \label{fig:catCodeSpec/control}
+\end{figure}
