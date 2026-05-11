@@ -14,13 +14,50 @@
 This chapter provides the background needed to understand the project: the wider context, existing solutions or related work, and a clear problem statement (and research question(s) where applicable). Replace with your own review.
 
 
-\section{Context}\label{sec:context}
+\section{Context}\label{sec:background/context}
 % Wider context, domain, motivation. Optional subsections: stakeholders,
 % constraints, assumptions.
 
-\section{Related work}\label{sec:related}
+https://hwb.gov.wales/curriculum-for-wales/science-and-technology/descriptions-of-learning/
+
+\section{Related work}\label{sec:background/related}
 % Prior solutions, methods, or systems; identify gaps your work addresses.
 % Optional subsections: by theme, chronology, or type (e.g.\@ systems, methods, theory).
 
-\section{Problem statement}\label{sec:problem}
+There are numerous existing video games or tools that can -- intentionally, or often unintentionally -- teach programming and software development skills. They have been divided up into three categories: \textit{instruction sequence games}, \textit{sandbox programs}, and \textit{incidental systems}. For this the purposes of this project, especially with \textit{incidental systems}, intent to teach is not required. We will also be evaluating the advantages and disadvantages of each approach (see \autoref{tab:related/isg-adv-dis},).
+
+\subsection{Instruction Sequence Games}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|p{6cm}|p{6cm}|}\hline
+        \textbf{Advantages} & \textbf{Disadvantages} \\\hline
+        - Intrinsic direction & - Often boring \\
+        - Intuitive to design & - Difficulty including selection \\
+        - Intuitive to understand and play & - Outclassed by real-life toy robots \\
+    \hline\end{tabular}
+    \caption{Advantages and disadvantages of the Instruction Sequence Paradigm}
+    \label{tab:related/isg-adv-dis}
+\end{table}
+
+The intuitive approach for a game for our purposes is to make a puzzle game where you create a list of instructions for a character, often a robot, to follow to complete tasks. One example is \href{https://lightbot.com/}{LightBot} \citep{programmingAppsNYT,lightBot}. This archetype of game is intuitive to design, play and understand; however, often is not engaging and is narrow in scope, often not including selection in its mechanics. In other words, it is not something that learners would want to seek out nor motivate them to continue.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{C2//Examples/lightBotScreenshot.png}
+    \caption[Screenshot of LightBot]{Screenshot of LightBot, taken from \url{https://lightbot.com/}}
+    \label{fig:placeholder}
+\end{figure}
+
+Also, these games, provided an institution or person has the budget and are willing to lose the direction offered by a game, can be outclassed by using physical \textquote{robots}. Some examples of these products are \href{https://www.tts-group.co.uk/programmable-robots/bee-bot/}{Bee-Bots} \citep{BeeBots} and (formerly) \href{https://www.lego.com/en-gb/themes/mindstorms/about}{Lego Mindstorms} \citep{legoMindStorms}.
+
+\subsection{Sandbox Programs}
+
+\subsection{Incidental Systems}
+
+\subsection{Other Approaches}
+
+\subsection{Comparing Approaches}
+
+\section{Problem statement}\label{sec:background/problem}
 % Clear statement of the problem and, if applicable, research question(s).

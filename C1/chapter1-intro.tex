@@ -14,31 +14,19 @@
 % -----------------------------------------------------------------------------
 % Chapter intro (no section): one short paragraph before the first \section
 % -----------------------------------------------------------------------------
-This chapter introduces the dissertation. It outlines the motivation and context for the work, the aims and objectives, the main contributions, and the structure of the remaining chapters. The following sections expand on each of these.
 
-The rest this chapter details the \nameref{sec:introduction/motivation_and_context}, as well as the \nameref{sec:introduction/aims_and_objectives} of the project.
-
-Following this chapter~\ref{ch2:background}, will further flesh out the context, introduce and compare existing games and programs alongside their strengths and weaknesses.
-
-Chapter~\ref{ch3:method} explains the methodology of both the development and evaluation of the Code Heist prototype.
-
-Chapter~\ref{ch4:requirements} will detail the requirements used to develop the prototype and their reasoning.
-
-Chapter~\ref{ch5:design} describes and justifies the design of the prototype. The prototype produced for this dissertation was far more complex than anticipated, but -- potentially, as a result of this -- serves as an excellent blueprint or foundation for future projects.
-
-Chapter~\ref{ch6:results} critically analyses the prototype using the methods described in chapter 3, as well as providing a subjective evaluation of the prototype from the developer as well as approach itself.
-
-Finally, chapter~\ref{ch7:conclusions} details conclusions that can be drawn from the successes and shortcomings of this project. It will also go into detail about future work that can be spun off from this dissertation including alternative game genres, future methods of evaluation and potential future of Code Heist. There is also some discussion about the cut content from the prototype, although some of this had to be pushed into [TODO: list appendix].
-
-Beyond this, chapter~\ref{ch8:reflections} includes some reflections on the project as a whole from the author.
-
-As mentioned in frontmatter under \nameref{sec:source_code}, the source code is available on GitHub in both its modern state as well as its state at time of this report's submission.
 
 \section{Motivation and Context}\label{sec:introduction/motivation_and_context}
 
+It is commonly observed that learning to program can be overwhelming and difficult, and by extension is difficult to teach. Programming is often abstract and unintuitive to new programmers. Many people, especially students learning it for the first time, are not experienced in thinking algorithmically or computational thinking. This is not helped by the lack of intrinsic direction when writing a script. This is before considering other challenges associated with text-based languages such as syntax.
+
+One approach to solve this problem is to make use of video games to compartmentalise the challenges of learning and reducing the intimidation of learning the skills and logic for programming. These often fall into a few broad categories which will be defined and described in detail within \autoref{sec:background/related}. These categories are the \textquote{\textit{Sandbox Program}} with little-to-no intrinsic  direction, the \textquote{\textit{Instruction Sequence Game}} with puzzles designed around programming and the \textquote{\textit{Incidental System}} where analogies to software development are less direct, and potentially unintentional.
+
+The \citet{WelshGov-highStandardsAnd} has emphasises on \textquote{[b]reaking down barriers} for \textquote{all ages, at all ages} for education in many areas include digital competence in objective 2 of a policy and strategy document regarding education. For adult learning especially they put emphasis on online tools. In a increasingly digital world, it is clear that new, more engaging approaches are required to increase access to learning programming.
+
 \section{Aims and Objectives}\label{sec:introduction/aims_and_objectives}
 
-The aim of this project was to evaluate the efficacy of using video-games to teach programming through its games mechanics whilst avoiding the aforementioned ‘instruction sequence’ paradigm. This was be done by simulating a short development period to make a platforming game and then evaluating the results.
+The aim of this project was to evaluate the efficacy of using video-games to teach programming through its games mechanics whilst avoiding the aforementioned ‘instruction sequence’ paradigm, hoping to find a middle ground between the three approaches. This was be done by simulating a short development period to make a platforming game and then evaluating the results.
 
 \textbf{The project had the following objectives:}
 
@@ -51,4 +39,4 @@ The aim of this project was to evaluate the efficacy of using video-games to tea
 
 \section{Contributions}\label{sec:introduction/contributions}
 
-All of the code produced for this project was written by hand or through GUI tools within the Godot game engine's software for said engine. This project would not have been possible without this engine.
+All of the code produced for this project was written by hand or through GUI tools within the Godot game engine's software. This project would not have been possible without this engine. This report often refers to \textquote{the developer} separately to the \textquote{the author}; however, they are the same person. This is because the development process was independent from the report itself, with interactions between the two components kept to a minimum.
