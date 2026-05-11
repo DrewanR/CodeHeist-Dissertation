@@ -14,6 +14,8 @@
 %       - Removed the comma in citations
 %       - Replaced agsm.bst with a modified version closer to Cardiff Harvard
 %       - Swapped out the monospace font
+%       - Added supervisor and subtitle fields
+%       - Modified the title page
 %
 % This file may be distributed and/or modified under the terms of the
 % LaTeX Project Public License (LPPL), version 1.3c.
@@ -1020,13 +1022,17 @@
 % User commands store values in internal macros used by \maketitlepage and \bib
 
 \newcommand{\qdissertation@title}{}
+\newcommand{\qdissertation@subtitle}{}
 \newcommand{\qdissertation@author}{}
+\newcommand{\qdissertation@supervisor}{}
 \newcommand{\qdissertation@degree}{}
 \newcommand{\qdissertation@university}{Your University}
 \newcommand{\qdissertation@date}{\today}
 
 \renewcommand{\title}[1]{\gdef\qdissertation@title{#1}}
+\newcommand{\subtitle}[1]{\gdef\qdissertation@subtitle{#1}}
 \renewcommand{\author}[1]{\gdef\qdissertation@author{#1}}
+\newcommand{\supervisor}[1]{\gdef\qdissertation@supervisor{#1}}
 \newcommand{\degree}[1]{\gdef\qdissertation@degree{#1}}
 \newcommand{\university}[1]{\gdef\qdissertation@university{#1}}
 \renewcommand{\date}[1]{\gdef\qdissertation@date{#1}}
@@ -1104,20 +1110,29 @@
   \begin{titlepage}
     \thispagestyle{empty}% No page number on title page
     \begin{center}
-      \vspace*{3ex}
-      {\Huge\bfseries \qdissertation@title\par}
+      \includegraphics[width=1\linewidth]{C5/CatBot/MultipleJumping.png}
+      %{\Huge\bfseries \qdissertation@title :\par}
+      \includegraphics[width=1\linewidth]{PixelTitle.png}
+      {\LARGE\bfseries \qdissertation@subtitle\par}
+      \vspace{2cm}
+      {
+        \LARGE
+        \begin{fullwidth}
+          \centering
+          \begin{tabular}{ccc}
+            \bfseries\qdissertation@author\par & \phantom{-MEOW-} & \bfseries\qdissertation@supervisor\par \\
+            Author &  & Supervisor
+          \end{tabular}
+        \end{fullwidth}
+      }
       \vfill
-      {\LARGE \qdissertation@author\par}
-      \vfill\vfill\vfill
       % Only show the degree sentence if a non-empty degree has been set
       \ifstrempty{\qdissertation@degree}{}{%
         {\Large A dissertation submitted for the degree of\par}
         {\Large\bfseries \qdissertation@degree\par}%
-        \vspace{4ex}%
       }%
-      \vspace{8ex}
+      \vspace{2cm}
       {\Large \qdissertation@university\par}
-      \vspace{2ex}
       {\Large \qdissertation@date\par}
     \end{center}
   \end{titlepage}
