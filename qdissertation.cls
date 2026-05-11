@@ -13,6 +13,7 @@
 %   Changes:
 %       - Removed the comma in citations
 %       - Replaced agsm.bst with a modified version closer to Cardiff Harvard
+%       - Swapped out the monospace font
 %
 % This file may be distributed and/or modified under the terms of the
 % LaTeX Project Public License (LPPL), version 1.3c.
@@ -418,11 +419,11 @@
       }%
     \fi \fi
     \ifqdissertation@noobfuscate
-      \IfFontExistsTF{Source Sans Pro}{%
+      \IfFontExistsTF{Hack}{%
         \setmainfont{Source Sans Pro}%
         \setsansfont{Source Sans Pro}%
-        \IfFontExistsTF{Source Code Pro}{%
-          \setmonofont{Source Code Pro}[Scale=MatchLowercase]%
+        \IfFontExistsTF{Hack}{%
+          \setmonofont{Hack}[Scale=MatchLowercase]%
         }{%
           \setmonofont{TeX Gyre Cursor}[Scale=MatchLowercase]%
         }%
@@ -437,8 +438,8 @@
         \IfFontExistsTF{Source Sans Pro}{%
           \setmainfont{Source Sans Pro}%
           \setsansfont{Source Sans Pro}%
-          \IfFontExistsTF{Source Code Pro}{%
-            \setmonofont{Source Code Pro}[Scale=MatchLowercase]%
+          \IfFontExistsTF{Hack}{%
+            \setmonofont{Hack}[Scale=MatchLowercase]%
           }{%
             \setmonofont{TeX Gyre Cursor}[Scale=MatchLowercase]%
           }%
