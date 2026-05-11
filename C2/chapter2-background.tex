@@ -11,8 +11,7 @@
 % Assume a competent reader; avoid lengthy descriptions of standard tools.
 % =============================================================================
 
-This chapter provides the background needed to understand the project: the wider context, existing solutions or related work, and a clear problem statement (and research question(s) where applicable). Replace with your own review.
-
+This chapter summarises the background research that when into this project, specifically the wider context, existing solution and describes the cap in existing projects we are trying to fill. This research was then applied to make our requirements and many of the existing systems detailed were also inspired the design of CodeHeist.
 
 \section{Context}\label{sec:background/context}
 % Wider context, domain, motivation. Optional subsections: stakeholders,
@@ -24,7 +23,9 @@ https://hwb.gov.wales/curriculum-for-wales/science-and-technology/descriptions-o
 % Prior solutions, methods, or systems; identify gaps your work addresses.
 % Optional subsections: by theme, chronology, or type (e.g.\@ systems, methods, theory).
 
-There are numerous existing video games or tools that can -- intentionally, or often unintentionally -- teach programming and software development skills. They have been divided up into three categories: \textit{instruction sequence games}, \textit{sandbox programs}, and \textit{incidental systems}. For this the purposes of this project, especially with \textit{incidental systems}, intent to teach is not required. We will also be evaluating the advantages and disadvantages of each approach (see \autoref{tab:related/isg-adv-dis},).
+There are numerous existing video games or tools that can -- intentionally, or often unintentionally -- teach programming and software development skills. They have been divided up into three categories: \textit{instruction sequence games}, \textit{sandbox programs}, and \textit{incidental systems}. For this the purposes of this project, especially with \textit{incidental systems}, intent to teach is not required.
+
+We will also be evaluating the advantages and disadvantages of each approach (see \autoref{tab:related/isg-adv-dis}, \ref{tab:related/sbp-adv-dis} and \ref{tab:related/is-adv-dis}). 
 
 \subsection{Instruction Sequence Games}
 
@@ -35,6 +36,7 @@ There are numerous existing video games or tools that can -- intentionally, or o
         - Intrinsic direction & - Often boring \\
         - Intuitive to design & - Difficulty including selection \\
         - Intuitive to understand and play & - Outclassed by real-life toy robots \\
+        & - Low skill-ceiling \\
     \hline\end{tabular}
     \caption{Advantages and disadvantages of the Instruction Sequence Paradigm}
     \label{tab:related/isg-adv-dis}
@@ -46,18 +48,77 @@ The intuitive approach for a game for our purposes is to make a puzzle game wher
     \centering
     \includegraphics[width=0.5\linewidth]{C2//Examples/lightBotScreenshot.png}
     \caption[Screenshot of LightBot]{Screenshot of LightBot, taken from \url{https://lightbot.com/}}
-    \label{fig:placeholder}
+    \label{fig:background/examples/lightbot}
 \end{figure}
 
 Also, these games, provided an institution or person has the budget and are willing to lose the direction offered by a game, can be outclassed by using physical \textquote{robots}. Some examples of these products are \href{https://www.tts-group.co.uk/programmable-robots/bee-bot/}{Bee-Bots} \citep{BeeBots} and (formerly) \href{https://www.lego.com/en-gb/themes/mindstorms/about}{Lego Mindstorms} \citep{legoMindStorms}.
 
 \subsection{Sandbox Programs}
 
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}\hline
+        \textbf{Advantages} & \textbf{Disadvantages} \\\hline
+        - Intuitive programming & - No intrinsic direction \\
+        - Fully featured languages & - Relies on user to motivate themselves \\
+        - Paradigm is already understood by educators & - Can be overwhelming (user has to create algorithms from nothing)\\
+        - High skill ceiling & \\
+    \hline\end{tabular}
+    \caption{Advantages and disadvantages of the Sandbox Paradigm}
+    \label{tab:related/sbp-adv-dis}
+\end{table}
+
+There are numerous platforms that make use of visual block-based programming, such as \href{https://scratch.mit.edu/}{Scratch} \citep{scratch} that make high-level programming more accessible whilst avoiding the act of typing code by hand, reducing the barrier to entry alongside many other benefits described by \citet{scratchAnalysis}. The \citet{scratchAnualReport} reports high satisfaction with \textquote{87\% [of users] experience joy while using Scratch}. It is highly used in schools, with the foundation claiming to be the \textquote{\#1 coding language in K-8 schools globally} (\citeyear{scratchImpact}), which matches finding in a working paper by \citet{internationalTrends}. A similar example is \href{https://www.gethopscotch.com/about}{Hopscotch} \citep{hopscotch}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{C2//Examples/scratchScreenshot.png}
+    \caption[Screenshot of Scratch]{Screenshot of the Scratch user interface on 11/05/2026}
+    \label{fig:background/examples/scratch}
+\end{figure}
+
+It is clear that the approach the approach of using visual blocks is indeed successful, even ignoring potentially skewed self-reported statistics, and is already an approach favoured by educators worldwide. However, these programs act like blank canvases, providing no direction. This means that users rely on extrinsic motivation or directions when using them.
+
 \subsection{Incidental Systems}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}\hline
+        \textbf{Advantages} & \textbf{Disadvantages} \\\hline
+        - People do not realise they are learning & - Not a focussed approach \\
+        - Approachable & - Unprofessional \\
+        - Engaging & - Falls a bit too far away from scripting for our purposes \\
+         & - Needs to be adapted back towards programming \\
+    \hline\end{tabular}
+    \caption{Advantages and disadvantages of using incidental systems}
+    \label{tab:related/is-adv-dis}
+\end{table}
+
+The final of our categories are incidental systems. They are systems in games, or entire games which directly, or in-directly teach software development skills or techniques. These systems may not intend to do this. Essentially, this is when a game's mechanics teach the skills we are aiming to help develop without it being a focus. These are further removed from direct scripting.
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.75\linewidth]{C2//Examples/FactoriScreensheet.png}
+    \caption[Screenshot of Factorio]{Screenshot of Factorio, taken from \url{https://factorio.com/game/screenshots}}
+    \label{fig:related/example/factorio}
+\end{figure}
+
+One infamous example of this is \href{https://factorio.com/}{Factorio}\footnote{And other similar factory/manufacturing games, or system design games in general.} \citep{factorio}, which indirectly teaches -- too many people's surprise -- software development techniques and concepts \citep{factorioTeachesSoftwareDev1, factorioTeachesSoftwareDev2}. This is sometimes joked about by the game's community, which includes many software developers. What is notable is this games success whilst including these elements.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{NoitaWand.png}
+    \caption[Screenshot of a wand in Noita]{An example wand in Noita, from the Noita wiki, spells are cast left to right}
+    \label{fig:related/examples/wand}
+\end{figure}
+
+It should also be noted that there are often smaller systems in games that are analogous to programming. For example, one may combine sequences of events for a defined purpose, such as customising wands in \href{https://noitagame.com/}{Noita} \citep{Noita} by chaining together spells \citep{NoitaSpells, NoitaWandMech}. It also could be argued \textquote{redstone} and commands in \href{https://www.minecraft.net/en-us/about-minecraft}{Minecraft} \citep{Minecraft} also fall into this category, making use of similar logic chaining components, occasionally logic gates, to manage inputs and outputs.
 
 \subsection{Other Approaches}
 
-\subsection{Comparing Approaches}
+[TODO, IF TIME, CUT IF NOT]
 
-\section{Problem statement}\label{sec:background/problem}
+\section{Our Approach}\label{sec:background/problem}
 % Clear statement of the problem and, if applicable, research question(s).
+
+Every approach has its advantages and disadvantages when it comes to learning to program, with games often falling often falling into the one of the above categories. We were not able to find any games that filled the middle ground between these categories. Making one, hoping to combine the advantages presented by our three categories, thus became our project aiming to make learning to program more approachable.
