@@ -1,5 +1,5 @@
 
-The character controlled by the player is CatBot: a robot that looks like the cat, that has a failing control system that constants needs fixing. A cat was chosen as a combination for a few reasons. First, the developer is good, and enjoys, drawing cats. Second, cats are popular companions with an estimated 10.2 million pet cats in the UK \citep{CatOwnership}. And, finally, but more importantly, the developer had an existing sprite-sheet, shown in  that could be re-used, alongside an existing system that could be used as a base.
+The character controlled by the player is \textit{CatBot}: a robot that looks like the cat, that has a failing control system that constants needs fixing. A cat was chosen as a combination for a few reasons. First, the developer is good, and enjoys, drawing cats. Second, cats are popular companions with an estimated 10.2 million pet cats in the UK \citep{CatOwnership}. And, finally, but more importantly, the developer had an existing sprite-sheet, shown in  that could be re-used, alongside an existing system that could be used as a base.
 
 \begin{figure}
     \centering
@@ -17,9 +17,9 @@ The character controlled by the player is CatBot: a robot that looks like the ca
     \label{fig:design/catBotSpriteSheet}
 \end{figure}
 
-CatBot (found in \texttt{res://src/entities/player/player\_cat.tcsn}), which extends the custom-made \texttt{generic\_entity} class (...\texttt{/classes/generic\_entity.gd}). \texttt{generic\_entity} provides basic functions such managing HP, stability, and typing\footnote{Godot default type methods only provide the node type. Providing this method as a base to all entities makes implementing future systems easier}; and, in turn, extends the built-in \href{https://docs.godotengine.org/en/stable/classes/class\_characterbody2d.html}{Character Body 2D} node, which is designed \textquote{for physics bodies that are meant to be user-controlled}. This provides numerous functions, such as \texttt{move\_and\_slide()}, and attributes such as \texttt{velocity}.
+\textit{CatBot} (found in \texttt{res://src/entities/player/player\_cat.tcsn}), which extends the custom-made \texttt{generic\_entity} class (...\texttt{/classes/generic\_entity.gd}). \texttt{generic\_entity} provides basic functions such managing HP, stability, and typing\footnote{Godot default type methods only provide the node type. Providing this method as a base to all entities makes implementing future systems easier}; and, in turn, extends the built-in \href{https://docs.godotengine.org/en/stable/classes/class\_characterbody2d.html}{Character Body 2D} node, which is designed \textquote{for physics bodies that are meant to be user-controlled}. This provides numerous functions, such as \texttt{move\_and\_slide()}, and attributes such as \texttt{velocity}.
 
-The structure of the CatBot scene is shown in \autoref{fig:design/catBot-NodeStructure}. A summary of the mechanics chosen are shown in \autoref{sec:design/CatBot/ability}. CatBot was initially designed as a traditional platformer character, summarised in \autoref{sec:design/CatBot/traditional}, and then adapted to remove the controls, detailed in \autoref{sec:design/CatBot/modularisation}. Finally, CatCode was developed, the basics of how these systems interact with CatBot are shown in \autoref{sec:design/CatBot/instancing}.
+The structure of the \textit{CatBot} scene is shown in \autoref{fig:design/catBot-NodeStructure}. A summary of the mechanics chosen are shown in \autoref{sec:design/CatBot/ability}. CatBot was initially designed as a traditional platformer character, summarised in \autoref{sec:design/CatBot/traditional}, and then adapted to remove the controls, detailed in \autoref{sec:design/CatBot/modularisation}. Finally, \textit{CatCode} was developed, the basics of how these systems interact with \textit{CatBot} are shown in \autoref{sec:design/CatBot/instancing}.
 
 \begin{figure}
     \centering
@@ -172,7 +172,7 @@ func _physics_process(delta: float) -> void:
 
 \subsection{Extracting the Controllers}\label{sec:design/CatBot/modularisation}
 
-After the traditional player character was created, the control systems were removed from the node. This was when the player character became CatBot. In this process, nodes were created that can be instanced as children which would execute the actions instead of the CatBot node itself, an example of this node setup is in \autoref{fig:design/catBot-ModularisedNodes}.
+After the traditional player character was created, the control systems were removed from the node. This was when the player character became \textit{CatBot}. In this process, nodes were created that can be instanced as children which would execute the actions instead of the \textit{CatBot} node itself, an example of this node setup is in \autoref{fig:design/catBot-ModularisedNodes}.
 
 \begin{figure}
     \centering
@@ -181,7 +181,7 @@ After the traditional player character was created, the control systems were rem
     \label{fig:design/catBot-ModularisedNodes}
 \end{figure}
 
-Lets use the jumping as an example. Jumping was originally handled in its entirety by the \texttt{jump\_logic()} function. First, this was split into \texttt{jump(strength)}, which executed the jump and \texttt{jump\_logic()}, which would execute the \texttt{jump()} when appropriate. Then, \texttt{jump\_logic()} was moved over to the node \textquote{AutoJumpController} (\texttt{res://src/entities/player/autoControllers}), which would call the \texttt{jump()} function on its parent. Pseudocode for this process is shown in \autoref{fig:design/catBot-ModularisedFun}. The other auto-controllers use the same structure as shown in the class diagram in \autoref{fig:design/catBot-AutoController-ClassDiagram}.
+Lets use the jumping as an example. Jumping was originally handled in its entirety by the \texttt{jump\_logic()} function. First, this was split into \texttt{jump(strength)}, which executed the jump and \texttt{jump\_logic()}, which would execute the \texttt{jump()} when appropriate. Then, \texttt{jump\_logic()} was moved over to the node \textit{AutoJumpController} (\texttt{res://src/entities/player/autoControllers}), which would call the \texttt{jump()} function on its parent. Pseudocode for this process is shown in \autoref{fig:design/catBot-ModularisedFun}. The other auto-controllers use the same structure as shown in the class diagram in \autoref{fig:design/catBot-AutoController-ClassDiagram}.
 
 \begin{figure}[b]
     \centering
@@ -197,7 +197,7 @@ Lets use the jumping as an example. Jumping was originally handled in its entire
     \label{fig:design/catBot-AutoController-ClassDiagram}
 \end{figure}
 
-At this stage, custom error handling was added. The error checking was handled by CatBot in functions at time of execution. If something is not valid -- jumping whilst not grounded, for example -- the function wont execute and an error will be thrown updating the relevant variable and emitting the signal \texttt{major\_error\_occurred}. \autoref{fig:design/invlidJumpCommunication} depicts this scenario and \autoref{fig:design/finalJump} shows the final \texttt{jump()} function.
+At this stage, custom error handling was added. The error checking was handled by \textit{CatBot} in functions at time of execution. If something is not valid -- jumping whilst not grounded, for example -- the function wont execute and an error will be thrown updating the relevant variable and emitting the signal \texttt{major\_error\_occurred}. \autoref{fig:design/invlidJumpCommunication} depicts this scenario and \autoref{fig:design/finalJump} shows the final \texttt{jump()} function.
 
 \begin{figure}[H]
     \begin{fullwidth}
@@ -294,7 +294,7 @@ ENDFUNC
 
 \subsection{Adding CatCode to CatBot}\label{sec:design/CatBot/instancing}
 
-CatCode was initially created in isolation, with this integration with CatBot in mind. As is standard with CatCode, a CodeManager is added as a child to the CatBot node. This CodeManager will then execute functions on its parent as appropriate (shown in). No modifications were needed to CatBot as, from its perspective, a CodeManager is indistinguishable from an autoController.
+CatCode was initially created in isolation, with this integration with \textit{CatBot} in mind. As is standard with CatCode, a \textit{CodeManager} is added as a child to the \textit{CatBot} node. This \textit{CodeManager} will then execute functions on its parent as appropriate (shown in). No modifications were needed to \textit{CatBot} as, from its perspective, a \textit{CodeManager} is indistinguishable from an \textit{autoController}.
 
 \begin{figure}
     \centering
