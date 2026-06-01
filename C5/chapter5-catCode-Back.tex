@@ -84,6 +84,90 @@ The \texttt{update\_instructions()} function does the following:
 
 CatCode is compiled language. This is because, in many scenarios, a script is getting executed every frame meaning that execution speed is worth the cost in memory intensity. Because it is executed every frame, executions will greatly outnumber compilations. Also, relying on compiled CatCode for execution allowed the Code Editor to be swapped. It is the responsibility of the Code Editor to compile CatCode.
 
+Compiled CatCode consists of an array of \texttt{instruction\_line} class instances (full definition available in \autoref{fig:design/CatCodeBack/instructionLineFull}). Each element represents a single line storing -- through \texttt{instruction\_line} -- a line's indent, a reference to the line's \textit{LogicBlock}, and its parameters. For interpretation to work as intended, the final block must be a \textit{pass} block where it's \texttt{indent} is \texttt{0}.
+
+
+\begin{fullwidthfigure}
+    \centering
+    \begin{tcolorbox}[boxrule=0.25mm]
+    \begin{verbatim}
+class_name instruction_line
+
+var indent :int
+var primary_block :logic_block
+var parameters :Array
+var executable_function :bool = false
+var iterative_element :bool = false
+var selective_element :bool = false
+
+func _init(_indent :int, _primary_block :logic_block, _parameters :Array = []):
+    indent = _indent
+    primary_block = _primary_block
+    parameters = _parameters
+
+    match primary_block.block_type:
+        "function_block":
+            executable_function = true
+        "conditional_block":
+            selective_element = true
+        "iterative_block":
+            iterative_element = true
+
+
+func is_executable_function():
+    return executable_function
+
+func is_iterative_element():
+    return iterative_element
+
+func is_selective_element():
+    return selective_element
+
+func valid_parameters():
+    return (primary_block.get_parameter_count() == len(parameters))
+
+func uses_parameters():
+    return primary_block.has_parameters()
+
+func _to_string() -> String:
+    return str(indent) + ": " + str(primary_block.block_name) + [...]
+        "(" + str(parameters) + ")"
+
+func get_next_indent() -> int:
+    if iterative_element or selective_element:
+        return indent + 1
+    else:
+        return indent
+    \end{verbatim}
+    \end{tcolorbox}
+    \caption{Instruction class definition}
+    \label{fig:design/CatCodeBack/instructionLineFull}
+\end{fullwidthfigure}
+
+\begin{fullwidthfigure}[h]
+    \centering
+    \begin{subfigure}[T]{0.415\linewidth}
+        \centering 
+        \includegraphics[width=1\linewidth]{C5//CatCode/CatCodeExample2.png}
+        \caption{Uncompiled graphical CatCode}
+    \end{subfigure}
+    \begin{subfigure}[T]{0.5\linewidth}
+        \begin{tabular}{lll}\toprule
+            Ind. & Block & Parameters \\\midrule
+            0 & \textit{if} & [\textit{isButtonHeld}, ["Z"]] \\
+            1 & \textit{print} & ["Z"] \\
+            1 & \textit{if} & [\textit{and}, [\textit{isBu...}, "up"], [\textit{isBu...}, "down"]] \\
+            2 & \textit{print2} & ["Up", "Down"] \\
+            1 & \textit{elif} & [\textit{isButtonHelf}, ["x"]] \\
+            1 & \textit{print} & ["up"] \\
+            0 & \textit{pass} & [] \\ \bottomrule
+        \end{tabular}
+        \caption{Compiled code, stored in array \texttt{compiled\_code}}
+    \end{subfigure}
+    \caption{Compiled CatCode example}
+    \label{fig:placeholder}
+\end{fullwidthfigure}
+
 \subsection{Interpreting Compiled Code}
 
 \textbf{TODO}
