@@ -35,7 +35,7 @@ As shown in \autoref{fig:design/CatCodeBack/Overview}, there are multiple main c
 
 \subsection{The Logic Block Family of Classes}
 
-The \texttt{logic\_block} family of classes, sometimes semantically called \textit{LogicalBlocks}, handle the back-end functionality of the blocks. These store the metadata and implementation of the function that of CatCode blocks. There are multiple different types of blocks, explained below and in the class diagram in \autoref{fig:design/CatCode/LogicBlockClassDiagram}. Godot does have interfaces, instead abstract classes had to be used, nor does it support multiple inheritance, which greatly influenced this class structure.
+The \texttt{logic\_block} family of classes, sometimes semantically called \textit{LogicalBlocks}, handle the back-end functionality of the blocks. These store the metadata and implementation of the function that of CatCode blocks. There are multiple different types of blocks, explained below and in the class diagram in \autoref{fig:design/CatCode/LogicBlockClassDiagram}. Godot does not have interfaces, instead abstract classes had to be used, nor does it support multiple inheritance, which greatly influenced this class structure.
 
 \begin{fullwidthfigure}[h]
     \centering
@@ -158,7 +158,7 @@ func get_next_indent() -> int:
             1 & \textit{print} & ["Z"] \\
             1 & \textit{if} & [\textit{and}, [\textit{isBu...}, "up"], [\textit{isBu...}, "down"]] \\
             2 & \textit{print2} & ["Up", "Down"] \\
-            1 & \textit{elif} & [\textit{isButtonHelf}, ["x"]] \\
+            1 & \textit{elif} & [\textit{isButtonHeld}, ["x"]] \\
             1 & \textit{print} & ["up"] \\
             0 & \textit{pass} & [] \\ \bottomrule
         \end{tabular}
@@ -170,4 +170,73 @@ func get_next_indent() -> int:
 
 \subsection{Interpreting Compiled Code}
 
-\textbf{TODO}
+Compiled CatCode is interpreted sequentially by the runner (typically a \textit{CatThread}) using the \texttt{execute()} method in \texttt{cat\_thread.gd}. This is done by iterating across every index of the \texttt{compiled\_code}. The behaviour of this is modified by \texttt{indent\_stack}, a stack\footnote{Godot does not have a defined stack class. Instead, implements methods associated with stacks within the list data-type. However, for our algorithm this variable is always interacted with as a stack.} of \texttt{state\_stack\_layer} (class definition in \autoref{fig:design/catCode-stateStackLayer}), which manages structural elements such as \texttt{if} and \texttt{repeat}. The use of this stack allows for the interpretation of nested iteration, nested selection and any combination there of.
+
+The indent stack is analogous to a call stack in many programming languages, where the top represents the current section of code. The most important element of this for sequential interpretation is \texttt{state} an enum that determines whether the current line of code should be executed (\texttt{PASS\_STATES.DO}) or skipped (\texttt{PASS\_STATES.SKIP} or \texttt{PASS\_STATES.SKIP\_ALL}).
+
+To execute a function (provided all the conditions for its execution are met) \texttt{line.primary\_block.execute()} is called. If there are parameters, \texttt{.execute(line.params)} is called instead. Parameters are stored in an array to provide a standardized header for this functions regardless of parameter count.
+
+\begin{fullwidthfigure} 
+    \begin{tcolorbox}[boxrule=0.25mm]
+    \begin{verbatim}
+## Enum for the states of how a code will be treated: [br]
+## DO: will result in the code being executed,
+## SKIP_1: will skip until the next control statement of proper indent,
+## SKIP_ALL: will skip to the end of the indent.
+enum PASS_STATES { DO, SKIP, SKIP_ALL}
+
+## Enum for the type of layer in the indentStack
+enum STACK_LAYER_TYPE { NONE, CONDITIONAL, ITERATIVE }
+
+[...]
+
+## StateStackLayer:
+## Stores a layer of the state stack used for iteration and selection.
+## Acts as a struct.
+class stateStackLayer:
+    ## Current indent
+    var indent :int
+
+    ## The type of stack layer, determines if it is getting used by an if or repeat
+    var type :STACK_LAYER_TYPE 
+
+    ## Determines whether instructions should be skipped
+    var state :PASS_STATES
+
+    ## Number of repeats completed if iterative, else the number elifs passed
+    var rep :int
+
+    ## The line this layer was enterred using
+    var entry :int
+
+    func _init(_indent :int, _type :STACK_LAYER_TYPE, [...]
+        entry_state :PASS_STATES, _entry :int) -> void:
+        indent = _indent
+        type = _type
+        state = entry_state
+        entry = _entry
+        rep = 0
+    
+    func _to_string() -> String:
+        return "<" + str(indent) + ": " + STACK_LAYER_TYPE.keys()[type][0] +
+            " state:" + str(state)+" rep:"+str(rep)+" entry:"+str(entry)+">"
+    \end{verbatim}
+    \end{tcolorbox}
+    \caption{\texttt{StateStackLayer} class definition from \texttt{cat\_thread.gd}}
+    \label{fig:design/catCode-stateStackLayer}
+\end{fullwidthfigure}
+
+\paragraph{Conditional Structures (\texttt{if}, \texttt{elif}, \texttt{else})} As shown in \autoref{fig:design/CatCode-ConditionalFSM}, there are 5 states when interpreting conditional structures. Every state except the initial state \textquote{Evaluate} and the final state \texttt{end} are associated with the pass state of the same name.
+
+In the evaluate state, the statement is evaluated. This is done the same way as functions are executed. When a statement is true it then goes to the \textquote{do} state. In this state all the blocks are executed (including nested structures). After this, if there are any \texttt{elif} or \texttt{else} blocks, it enters the \textquote{skip all} state where all lines are skipped until the end of this conditional structure. This to prevent unnecessary evaluations as only one section of a conditional structure can be executed.
+
+When the previous statement is false, it enters the \textquote{skip} state. This will skip all lines until the next statement in the current conditional structure. If this statement is an \texttt{else}, than it enters the \textquote{do} state, else it will return to the \textquote{evaluate} state for the next statement.
+
+There is no true \textquote{end} line, instead it will assume it is the end of a block when the indent of the next line is lower than the current stack it is not \texttt{elif} or \texttt{else}. If this is the case, the current top of the stack will be \textquote{popped} using the \texttt{pop\_back()} method. This is one of the cases where the \texttt{line\_number} is not incremented in case as this process needs to be repeated for every indent until the indent is once more where it is meant to be.
+
+\begin{figure}
+    \centering
+    \includesvg[width=0.75\linewidth]{C5//CatCode/selectionStateDiagram}
+    \caption{Finite state machine for interpreting conditional structures}
+    \label{fig:design/CatCode-ConditionalFSM}
+\end{figure}
