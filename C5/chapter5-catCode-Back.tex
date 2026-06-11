@@ -13,7 +13,7 @@ This system ended up far more complicated than anticipated and was largely respo
 
 \subsection{Components}
 
-As shown in \autoref{fig:design/CatCodeBack/Overview}, there are multiple main components, whose responsibilities are listed in \autoref{tab:design/CatCode/ComponentResponsibilities}. The centre, and manager of this system is the \textit{CatCodeManager} (sometimes semantically the \textit{CodeManager}, \texttt{res://src/catCode/cat\_code\_ manager.tscn}). This is instanced as a child of the node it is controlling. It stores the \textbf{InstructionSet}, a pair of variables: \texttt{instruction\_list} (a list of references instruction blocks) and \texttt{instruction\_dict} (a dictionary of the same references). By default, the \textit{LogicBlock} nodes are instanced as shildren of the \textit{CodeManager} node. Refer to \autoref{fig:catCodeSpec/files} for the file locations.
+As shown in \autoref{fig:design/CatCodeBack/Overview}, there are multiple main components, whose responsibilities are listed in \autoref{tab:design/CatCode/ComponentResponsibilities}. The centre, and manager of this system is the \textit{CatCodeManager} (sometimes semantically the \textit{CodeManager}, \texttt{res://src/catCode/cat\_code\_ manager.tscn}). This is instanced as a child of the node it is controlling. It stores the InstructionSet, a pair of variables: \texttt{instruction\_list} (a list of references instruction blocks) and \texttt{instruction\_dict} (a dictionary of the same references). By default, the \textit{LogicBlock} nodes are instanced as shildren of the \textit{CodeManager} node. Refer to \autoref{fig:catCodeSpec/files} for the file locations.
 
 \begin{fullwidthtable}[]
     \centering
@@ -226,7 +226,9 @@ class stateStackLayer:
     \label{fig:design/catCode-stateStackLayer}
 \end{fullwidthfigure}
 
-\paragraph{Conditional Structures (\texttt{if}, \texttt{elif}, \texttt{else})} As shown in \autoref{fig:design/CatCode-ConditionalFSM}, there are 5 states when interpreting conditional structures. Every state except the initial state \textquote{Evaluate} and the final state \texttt{end} are associated with the pass state of the same name.
+\paragraph{Conditional Structures (\texttt{if}, \texttt{elif}, \texttt{else})}
+
+As shown in \autoref{fig:design/CatCode-ConditionalFSM}, there are 5 states when interpreting conditional structures. Every state except the initial state \textquote{Evaluate} and the final state \texttt{end} are associated with the pass state of the same name.
 
 In the evaluate state, the statement is evaluated. This is done the same way as functions are executed. When a statement is true it then goes to the \textquote{do} state. In this state all the blocks are executed (including nested structures). After this, if there are any \texttt{elif} or \texttt{else} blocks, it enters the \textquote{skip all} state where all lines are skipped until the end of this conditional structure. This to prevent unnecessary evaluations as only one section of a conditional structure can be executed.
 
@@ -240,3 +242,49 @@ There is no true \textquote{end} line, instead it will assume it is the end of a
     \caption{Finite state machine for interpreting conditional structures}
     \label{fig:design/CatCode-ConditionalFSM}
 \end{figure}
+
+\paragraph{Iterative Structures (\texttt{repeat}, \texttt{forever})}
+
+Similar to selective statements, when a iterative statement is reached a new \texttt{state\_stack\_layer} is pushed to the \texttt{indent\_stack}, the main purpose of this layer is to store the entry line and number of repetitions. When this occurs the current line number (\texttt{line\_number}) is not incremented. This is because so the statement is evaluated on the first iteration.
+
+When the current line is the current iterative statement, it is evaluated using \texttt{line.primary\_block.evaluate([line.parameters[0], indent\_stack.back()])}. If it returns true, it remains in a \textquote{pass} state; else, it enters the \texttt{skip all} state.
+
+When the end of the code section is reached (similar to conditional structures), if its in the pass state, the repetition count is increased and \texttt{line\_count} is set to the line of the current iterative statement; else, this structure will end similar to conditional structures. If the logic block for the statement returns \texttt{true} when \texttt{should\_wait\_for\_next\_frame()} is called, the runner will wait for the next frame before continuing.
+
+A state diagram is shown in \autoref{fig:design/CatCode-iterativeFSM}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{C5/CatCode/iterativeStateDiagram.png}
+    \caption{Finite state machine for interpreting iterative structures}
+    \label{fig:design/CatCode-iterativeFSM}
+\end{figure}
+
+\subsection{Multi-Threading and Run Options}
+
+As a result of \texttt{repeat} blocks waiting for new frames for each iteration, there needed to be a method of handling clashing processes. This was done using \textit{catThread}s. These are instanced as children of the \textit{catCodeManager} and managed by it, referenced through the list \texttt{cat\_threads} and passed compiled catCode. The parameters that determine how theses threads are managed are shown in \autoref{tab:design/CatCode-threadParams}, as well as \autoref{fig:design/catBot-example-instance}b.
+
+\begin{fullwidthtable}[h]
+    \centering
+    \begin{tabular}{llp{8.5cm}}\toprule
+         Variable & Options & Description\\\midrule
+         When to run
+            & Never & The \textit{codeManager} will never directly execute the code, this instead has to be done by an external entity calling \texttt{run\_script()} \\
+            & Ready & The \textit{CodeManager} will run the code once itself, when it is initially Will infer behavior from auto-runinstantiated. \\
+            & Process & The \textit{CodeManager} will call \texttt{run\_script()} every frame. \\
+            & Primary Action & The \textit{CodeManager} will call \textit{run\_script()} every time the primary action key (default: Z) is pressed. \\
+            & Secondary Action & As above, except for when the secondary action key is press (default: X). \\
+        When to compile
+            & Never &  The \textit{codeManager} will not compile the code, this instead has to be done by an external entity (often the editor) by calling \texttt{<editor>.compile()} \\
+            & Run & The \textit{CodeManager} will automatically compile the code every time it is run. \\
+            & Default & The \textit{CodeManager} will infer the best option based on the value of \texttt{when\_to\_run}.\\
+        Maximum Threads
+            & \textit{Integer > 1} & This determines the maximum number of concurrent \textit{CatThreads}, the action to be taken when this number is exceeded is determined by \textquote{Thread Overflow Behaviour}. \\
+        Thread Overflow Behaviour
+            & Never Replace & The \textit{CodeManager} will never replace a thread still getting executed exclude for re-compilation. \\
+            & Always Replace & The \textit{CodeManager} will always replace a thread with a new one when \texttt{run\_script()} is called.
+        \\\bottomrule
+    \end{tabular}
+    \caption{CatCode execution options}
+    \label{tab:design/CatCode-threadParams}
+\end{fullwidthtable}
