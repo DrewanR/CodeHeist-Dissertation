@@ -1,0 +1,40 @@
+
+
+CatCode was originally developed using a text editor; however, due to the modular structure of the CatCode systems, this could be swapped out for the graphical editor. The graphical editor handles editing and compilation, is shown in \autoref{fig:design/catCode-example-graphical}, and is available in: \texttt{res://src/catCode/ui/basic\_graphical\_editor}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{C5//GraphicalCatCode/basicGraphicalIDEexample.png}
+    \caption[Example graphical catCode]{Example graphical catCode, taken from \texttt{res://levels/test/gui\_basic\_ide.tscn}}
+    \label{fig:design/catCode-example-graphical}
+\end{figure}
+
+\subsection{Structure}
+
+The graphical editor relies \textit{HBox} and \textit{VBox} nodes, which automatically align nodes in the order they are instanced in the node tree. The structure of these nodes are shown in \autoref{fig:design/catCode-graphicalEditor-Nodes} This was choice, alongside all the others for designing this UI were pragmatic and made under the assumption that aesthetics (such are colour and font) and form would be improved later in development.
+
+There are three main components:
+\begin{enumerate}
+    \item The \textbf{header bar} which contains buttons that show documentation and help menus.
+    \item The \textbf{function header} which says when the script is executed.
+    \item The \textbf{code container} which contains \textit{GraphicalBlock} instances as children and is where script editing is undertaken. 
+\end{enumerate}
+
+\begin{fullwidthfigure}
+    \centering
+    \includegraphics[width=1\linewidth]{C5/GraphicalCatCode/GraphicalEditorDiagram.drawio.png}
+    \caption{Node structure of the basic graphical editor}
+    \label{fig:design/catCode-graphicalEditor-Nodes}
+\end{fullwidthfigure}
+
+\subsection{Function Blocks}
+
+Function blocks handle a line of catCode in its entirety, including display, indent and parameters. Function blocks are a family of nodes shown in \textbf{[figure]} (contained within \texttt{catCode/graphicalBlocks}) that inherent the scene/node \textit{graphicalBlock}, which are made of defined components (\texttt{catCode/graphicalComponents}), listed in \textbf{[figure]}. The general structure of these blocks is shown in \textbf{[figure]}
+
+
+
+\subsection{Operand Blocks}
+
+Operand blocks are handled as components of their parent graphical block, similar to parameters, using the \textit{operandContainer} node. This handles to menu to add the new block, storing the operand(s), and compiling them.
+
+\subsection{Building and Compiling}
