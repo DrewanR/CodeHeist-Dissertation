@@ -1,7 +1,7 @@
 % =============================================================================
 % CHAPTER 6: Reflection on Learning
 % =============================================================================
-% SPDX-FileCopyrightText: 2026 Frank Langbein <frank@langbein.org>
+% SPDX-FileCopyrightText: 2026 Drewan Rutherford
 % SPDX-License-Identifier: LPPL-1.3c
 %
 % Suggested sections: Critical narrative of the experience; Analysis and application;
@@ -12,13 +12,24 @@
 % comment out the \chapter and \input in main.tex.
 % =============================================================================
 
-This chapter reflects on what was learned from the project: how assumptions and decisions were re-evaluated and what would be done differently in future.
+%This chapter reflects on what was learned from the project: how assumptions and decisions were re-evaluated and what would be done differently in future.
 
 \section{Critical narrative of the experience}\label{sec:challenges}
 % Key challenges, turning points, and how they affected your understanding.
+The main constraint throughout this project has been time, and a lack of similar examples. This resulted in multiple instances of compromises getting made throughout. The defining instance of this being the incomplete prototype only containing the main prototype. This caused a cascading effect of compromise scaling all the way into the report itself, where we had to return to the drawing board and discard some amount of research and work, or push it to the appendices.
 
 \section{Analysis and application}\label{sec:reflection}
 % How you analysed the experience and applied learning to decisions or concepts.
+The main question looking back is \textquote{could this be foreseen?} With the information gathered in phase 1, no. We were aware of the risk of the core systems as early as the initial report \citep{initial-report}, evident in the risk assessment covering \textquote{scope or time creep}, \textquote{unforeseen circumstances affecting the author. e.g. Illness}, \textquote{Insufficent data to evaluate the prototype game}, and a scenario in which \textquote{a functional game fulfilling the requirements cannot be made}. This is alongside, the work plan including overflow time for development. However, this risk was not taken seriously enough, nor multiple of these risk factors colliding.
+
+Similar to this, CatCode was developed swiftly, which worked for a prototype; however, it resulted in an unwieldy back-end that would require significant refactoring. However, the decision to develop a more rigid foundation following OOP principles, even if it potentially resulted in a longer development time, was the correct one, as it would prevent us having to return to the drawing board if we were to continue development.
+
+Finally, there are few questionable decisions in the structure of this report, namely referring to the developer and the author as if they are separate people. This is likely a consequence of being the first report by this author of this length, and the greater time pressure as a result of the extended development.
 
 \section{Implications for future practice}\label{sec:implications}
 % What you will take forward: habits, assumptions, or approaches in future work.
+Ultimately, there is no one big lesson learnt from this project, instead a hundred smaller ones. Most of these come back to intentionality. Our contingency plans for if our original goal was not achieved were serviceable, however going forward, we will be more intentional with them.
+
+As well as that, we will endeavour to prevent the same time creep from happening again in the future. There is no one solution to that, however. For this project, that would involve extending the research period, and starting smaller with our scope. Rather than approaching this as the full game, perhaps focusing on the core system before considering expanding outwards.
+
+Finally, on the technical side of things, with the exception of rapid prototyping, we will take the time to fully design and document a system as complex as CatCode before writing code, whilst also being less afraid to refactor code for more helpful variable and function names. And never use the variable name \texttt{parent} unless it is a direct parent-child relationship\footnote{In either social or technical sense}.
