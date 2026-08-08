@@ -33,6 +33,29 @@ This scenario was chosen because it mirrors relationships that many people, espe
 
 It was not expected that all of these levels would get implemented in full outside of a best case scenario.
 
-Whilst there are many plot structures
+Whilst there are many plot structures we would have borrowed from, our earliest planning was to follow the three act structure. \textbf{Table below} shows the rough plan for this structure in terms of events, plot elements and programming features.
+
+We chose to think mainly in terms of the three act structure because we wanted a more episodic plot to allow for greater flexibility than more prescriptive structures such as \textquote{The Hero's journey}, or Save the Cat's \textquote{Beatsheet} \citep{SaveTheCat}. It could also be argued that this structure falls into a \textquote{Fichtean Curve} as described by \citet{plotStruct}. The main notable deviation from most definitions of the three act structure, including Duncans, is that that Code Heist was going to start \textquote{In Medias Res}, with the Eve and the Player on the street opposite the bank.
+
+\textbf{TODO: TABLE of LEVELS}
 
 \section{Puzzle Ideas}\label{sec:cut/puzzleIdeas}
+
+Below is a list of mechanics that could be implemented into the game for puzzles. It is not yet clear how usable or fun any of the following are.
+
+\paragraph{Recreating jumping and movement} \textit{uses: selection, and functions}
+
+\paragraph{Navigating vents} \textit{uses: definite iteration, functions, etc}. One of the earliest problems identified with the platformer medium was including iteration, a workaround was to create a mini game where the player programs a drone (potentially the cat's tail to make it an homage to the classic game snake) which would navigate the a series of vents using pre-programmed instructions as there is no signal to control it from the outside. At minimum this would allow the inclusion of iteration.
+
+\paragraph{Hacking other robots} \textit{uses: various functions}. This would be a more complex system to implement, however, if we wanted the player to learn to read and modify existing code, this could be done through hacking various robots to break them, or make them less of a threat. This would be making a laser move slower or removing a robot's ability to attack for example.
+
+\paragraph{Different States} \textit{uses: selection, and (potentially) variables}. To add further complexity to the CatBot controllers, we could add multiple different states that CatBot could enter which would vary how it behaves. For example, CatBot could enter a water state when in the water which would prevent jumping and require a swim function. This example would require the implementation of water. As a bonus, this teaches the player about states which are a concept common in programming, and may allow for an introduction to finite state machines.
+
+\paragraph{Advanced movement} \textit{uses: various functions}. Similar to Celeste's movement \textquote{tech} such as \textquote{wave-dashing} \citep{celesteTech}, CodeHeist has various advanced techniques within it's movement. For example, you can strike immediately before jumping for extra distance. The physics engine used as a template for CatBot had even more of these. Because these can be hard to pull off with human hands, the player may be able to reimplement these using CatCode to occure in a single button press rather than multiple.
+
+\paragraph{Limited editing} An extra layer of challenge that can be added on top of other scenarios is limiting where CatBot's code can be edited. This would increase the amount of forward thinking and planning the player would need to partake in to clear levels. It would also mean that players would have to think about how they bind keys as they may be limited in the number of keys they have access to, so may have to resort to combinations of keys.
+
+\paragraph{Error-proof code} To add an extra layer of challenge to the game, we might be able to add optional objectives for creating error-proof code. This is code where, no mater what inputs you do in what state, CatBot can never throw errors. For example, the player has created code that wont allow the jump function to be called in midair.
+
+Making this optional may also make the game more approachable as less experienced programmers will be able to make it through levels (using jump as an example) by avoiding pressing their jump key whilst in midair without implementing error prevention. This may, however, risk allowing players to avoid certain mechanics.
+
