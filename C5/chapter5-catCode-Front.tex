@@ -27,13 +27,51 @@ There are three main components:
     \label{fig:design/catCode-graphicalEditor-Nodes}
 \end{fullwidthfigure}
 
+\begin{fullwidthfigure}
+    \centering
+    \begin{subfigure}[T]{1\linewidth}
+        \centering
+        \begin{tabular}{lll}\toprule
+             Name & Contents & Composition \\\midrule
+             Graphical Block* & Generic block with no parameters & [<id>] \\
+             GB 1 FakeParam & Block with only a hidden parameter & [<id> <fk>] \\
+             GB 1 OpenPositiveIntBox & Block with single positive number parameter & [<id> (<int>)] \\
+             GB 1 Operand & Block with single operand, for blocks such as \texttt{if} & [<id> (<op>)] \\
+             GB 1 StengthParam & Block with parameter between \texttt{0.0} and \texttt{1.0} & [<id> (<00\%>)] \\
+             GB 1 TextBox & Block with a single textbox & [<id> (<txt>)] \\
+             GB 2 TextBox & Block with two textboxes & [<id> (<txt>,<txt>)] \\ \midrule
+             Basic Operand* & Generic operand with only a label & [<id>] \\
+             OP 1 DropDown & Operator with a drop down of options & [<id> (<dd>)] \\
+             OP 1 OperandContainer & Operator with an operand container, used by \texttt{not} & [<id> <op>] \\
+             OP 2 OperandContainers & Operator with 2 operand containers, used by \texttt{and} & [<op> <id> <op>] \\
+             OP 1 TextBox & Operand with a single text parameter & [<id> (<txt>)]
+        \\ \bottomrule\end{tabular}
+        \caption[Table of graphical blocks]{Table of graphical blocks. *Used as a superclass for other blocks.}
+        \label{fig:design/catCode-graphicalBlocksAndComponents-A}
+    \end{subfigure}
+    \begin{subfigure}[T]{0.6\linewidth}
+        \centering
+        \begin{tabular}{lll}\toprule
+            id & Name & Use \\\midrule
+            \texttt{--} & Basic indent node & Visual representation of indents \\
+            \texttt{<id>} & Block auto identifier & Text showing blocks name \\
+            \texttt{<dd>} & Drop down param & Drop-down for pre-defined options \\
+            \texttt{<fk>} & Fake param & Fake parameter created to fix a bug \\
+            \texttt{<int>} & Integer param & Self explanatory \\
+            \texttt{<op>} & Operator container & Slot for boolean operator \\
+            \texttt{<00\%>} & Stength parameter & Strength percentage value \\
+            \texttt{<txt>} & Text box param & Self explanatory
+        \\ \bottomrule\end{tabular}
+        \caption[Table of graphical components]{Table of graphical components, id for use only within this figure}
+        \label{fig:design/catCode-graphicalBlocksAndComponents-B}
+    \end{subfigure}
+    \caption{Graphical components and graphical blocks.}
+    \label{fig:design/catCode-graphicalBlocksAndComponents}
+\end{fullwidthfigure}
+
 \subsection{Function Blocks}
 
-Function blocks handle a line of catCode in its entirety, including display, indent and parameters. Function blocks are a family of nodes shown in \textbf{[figure: list of graphical blocks]} (contained within \texttt{catCode/graphicalBlocks}) that inherent the scene/node \textit{graphicalBlock}, which are made of defined components (\texttt{catCode/graphicalComponents}), listed in \textbf{[figure]}. The general structure of these blocks is shown in \textbf{[figure]}
-
-\textbf{TODO: TABLE of GRAPHICAL BLOCKS}
-
-\textbf{TODO: TYPICAL GRAPHICAL BLOCK}
+Function blocks handle a line of catCode in its entirety, including display, indent and parameters. Function blocks are a family of nodes shown in \autoref{fig:design/catCode-graphicalBlocksAndComponents-A} (contained within \texttt{catCode/graphicalBlocks}) that inherent the scene/node \textit{graphicalBlock}, which are made of defined components (\texttt{catCode/graphicalComponents}), listed in \autoref{fig:design/catCode-graphicalBlocksAndComponents-B}. The composition of these blocks are also shown in \autoref{fig:design/catCode-graphicalBlocksAndComponents}.
 
 \subsection{Operand Blocks}
 
