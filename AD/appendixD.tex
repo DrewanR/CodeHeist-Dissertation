@@ -33,11 +33,49 @@ This scenario was chosen because it mirrors relationships that many people, espe
 
 It was not expected that all of these levels would get implemented in full outside of a best case scenario.
 
-Whilst there are many plot structures we would have borrowed from, our earliest planning was to follow the three act structure. \textbf{Table below} shows the rough plan for this structure in terms of events, plot elements and programming features.
+Whilst there are many plot structures we would have borrowed from, our earliest planning was to follow the three act structure. \autoref{tab:cutContent/tableOfLevels} shows the rough plan for this structure in terms of events, plot elements and programming features. Levels use the \texttt{<chapter/floor>--<room>} naming scheme (where chapters and floors can be used interchangably), mirroring the \texttt{<world>--<level>} scheme of mario bros.
 
-We chose to think mainly in terms of the three act structure because we wanted a more episodic plot to allow for greater flexibility than more prescriptive structures such as \textquote{The Hero's journey}, or Save the Cat's \textquote{Beatsheet} \citep{SaveTheCat}. It could also be argued that this structure falls into a \textquote{Fichtean Curve} as described by \citet{plotStruct}. The main notable deviation from most definitions of the three act structure, including Duncans, is that that Code Heist was going to start \textquote{In Medias Res}, with the Eve and the Player on the street opposite the bank.
+We chose to think mainly in terms of the three act structure because we wanted a more episodic plot to allow for greater flexibility than more prescriptive structures such as \textquote{The Hero's journey}, or Save the Cat's \textquote{Beatsheet} \citep{SaveTheCat}. It could also be argued that this structure falls into a \textquote{Fichtean Curve} as described by \citet{plotStruct}. The main notable deviation from most definitions of the three act structure, including Duncan's, is that that Code Heist was going to start \textquote{In Medias Res}, with the Eve and the Player on the street opposite the bank.
 
-\textbf{TODO: TABLE of LEVELS}
+Whilst it cannot be shown at this degree of specificity, we planned for each mechanic to be introduced in the following structure:
+
+\textbf{TODO: Structure}
+
+\begin{fullwidthtable}
+    \centering
+    \begin{tabular}{ccp{6.8cm}p{7.4cm}}\toprule
+        Act & Floor & Thematic/Plot Content & Gameplay Content \\\midrule
+        1
+            & 0
+                & Getting CatBot up to the bank and the ground floor of the bank, before the auto-controllers start getting jammed and breaking.
+                & Short introduction to platforming using an auto-controlled CatBot.
+                \\ \\
+            & 1
+                & CatBot starts to loose signal, plus it starts to become apparent that the bank might not be an ordinary bank.
+                & Basic CatCode programming, recreating jumping, striking etc. before going to more complex scenarios. Starting out with just implementing sequences of functions executed on button presses before moving onto scripts ran every frame requiring the use of selection.
+                \\ \\
+        2
+            & 2\&3
+                & More complex security measures start to appear necessitating more complex programming scenarios. Narrative function shifts to tension between the Player and Eve as Eve is being secretive about the nature of what they are doing. Tensions reach a boiling point towards the end of floor 3.
+                & More programming elements are introduced, alongside This is where variables, states and other puzzles described in \autoref{sec:cut/puzzleIdeas} will start to appear. Specifics cannot be provided until the difficulty of puzzles can be determined.
+                \\ \\
+        3
+            & 4
+                & Eve and the Player reconcile as she reveals that she is reveals that her motivation. This floor contains the hardest puzzles in the game before the final \textquote{boss}.
+                & Continuation of the gameplay arc in floors 2 and 3, including all of the CatCode spec. However, hints will be less available as Eve is focusing on hacking into the Boss's account for the vault code.
+                \\ \\
+            & 5
+                & The team reach the final floor on their mission, before facing off against the evil boss. It is revealed that the vault code is 1234, alongside an appropraite joke about insecure passwords. Once the boss is initially appears to be defeated, the self destruct is initiated alongside an escape sequence. 
+                & This section would include all the gimmicks from previous floors, combining them. The boss would not be a traditional boss, instead being a scenario where the player is forced to program CatBot in safe areas before moving into more dangerous areas, whilst thinking ahead in terms of the vent mini-game.
+                \\ \\
+            & 6
+                & This is the only part of the game not represented by a floor, instead it is an escape sequence throughout the bank as it self destructs. At the end the there will be a final phase to the final boss in the sky above the city, where the player programs the orbital death laser.
+                & No new gameplay will be introduces here, rather covering everything before but with more (perceived) time constraints. This is meant to act more as a victory lap than a real challenge. Hacking the Orbital Death Laser is not intended to be difficult, but will be the first time a mechanic is not introduced in a safe environment.
+                
+    \\ \bottomrule\end{tabular}
+    \caption[Outline of CodeHeist's story and gameplay]{Basic preliminary draft of CodeHeist in terms of plot and gameplay. Note: Story elements would be the first to be cut and were to be treated as asperational.}
+    \label{tab:cutContent/tableOfLevels}
+\end{fullwidthtable}
 
 \section{Puzzle Ideas}\label{sec:cut/puzzleIdeas}
 
