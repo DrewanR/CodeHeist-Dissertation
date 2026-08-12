@@ -79,4 +79,8 @@ Operand blocks are handled as components of their parent graphical block, simila
 
 \subsection{Building and Compiling}
 
-\textbf{TODO}
+The graphical editor stores the code in a semi-compiled state (\texttt{draft\_code}) at all times as well as the most recent fully compiled code. \texttt{Draft\_code} will always contain up to date function blocks, and is updated whenever new blocks are added, but may not contain up to date parameters. It operates off two main methods: \texttt{push\_code()} and \texttt{pull\_code()}, pseudocode in \textbf{FIGURES}. Each \textit{graphicalBlock} also has a push and pull function which will either construct its parameters or convert them into compiled code (recursively when operators are involved). Every action can be reducing to pushing and pulling as shown in \textbf{FIGURE}.
+
+References to \textit{logicBlocks} are stored in two arrays (\texttt{operand\_list} and \texttt{function\_list}) rather than one, this is done to separate blocks that can only exist as parameters of other blocks from function blocks for use within menus. When the instruction set within \textit{CodeManager} it emits the signal \texttt{instructions\_updated}, which carries the new instruction set. The editor receives this and uses this to construct its own arrays.
+
+Compiled code is similarly passed back to to the \textit{CodeManager} through the use of signals, although it is expected that the \textit{CodeManager} calls the \texttt{compile()} function. The communication between nodes is shown in \textbf{FIGURE}.
