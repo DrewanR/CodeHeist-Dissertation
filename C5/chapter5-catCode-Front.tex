@@ -79,17 +79,17 @@ Operand blocks are handled as components of their parent graphical block, simila
 
 \subsection{Building and Compiling}
 
-The graphical editor stores the code in a semi-compiled state (\texttt{draft\_code}) at all times as well as the most recent fully compiled code. \texttt{Draft\_code} will always contain up to date function blocks, and is updated whenever new blocks are added, but may not contain up to date parameters. It operates off two main methods: \texttt{push\_code()} and \texttt{pull\_code()}, pseudocode in \textbf{FIGURES}. Each \textit{graphicalBlock} also has a push and pull function which will either construct its parameters or convert them into compiled code (recursively when operators are involved). Every action can be reducing to pushing and pulling as shown in \autoref{fig:design/catCode-GUI-methods}.
+The graphical editor stores the code in a semi-compiled state (\texttt{draft\_code}) at all times as well as the most recent fully compiled code. \texttt{Draft\_code} will always contain up to date function blocks, and is updated whenever new blocks are added, but may not contain up to date parameters. It operates off two main methods: \texttt{push\_code()} and \texttt{pull\_code()}, pseudocode in \autoref{fig:design/catCode-GUI-push} and \autoref{fig:design/catCode-GUI-pull}. Each \textit{graphicalBlock} also has a push and pull function which will either construct its parameters or convert them into compiled code (recursively when operators are involved). Every action can be reduced to pushing and pulling as shown in \autoref{fig:design/catCode-GUI-methods}.
 
-References to \textit{logicBlocks} are stored in two arrays (\texttt{operand\_list} and \texttt{function\_list}) rather than one, this is done to separate blocks that can only exist as parameters of other blocks from function blocks for use within menus. When the instruction set within \textit{CodeManager} it emits the signal \texttt{instructions\_updated}, which carries the new instruction set. The editor receives this and uses this to construct its own arrays.
+References to \textit{logicBlocks} are stored in two arrays (\texttt{operand\_list} and \texttt{function\_list}) rather than one, this is done to separate blocks that can only exist as parameters of other blocks from function blocks for use within menus. When the instruction set is updated within \textit{CodeManager} it emits the signal \texttt{instructions\_updated}, which carries the new instruction set. The editor receives this and uses this to construct its own arrays.
 
-Compiled code is similarly passed back to to the \textit{CodeManager} through the use of signals, although it is expected that the \textit{CodeManager} calls the \texttt{compile()} function. The communication between nodes is shown in \textbf{FIGURE}.
+Compiled code is similarly passed back to to the \textit{CodeManager} through the use of signals, although it is expected that the \textit{CodeManager} calls the \texttt{compile()} function. The communication between nodes is shown in squence diagrams in \autoref{fig:design/catCode-GUI-comms-1}, \ref{fig:design/catCode-GUI-comms-2} and \ref{fig:design/catCode-GUI-comms-3}.
 
 \begin{fullwidthfigure}
     \centering
     \begin{subfigure}[t]{0.45\linewidth}
         \smaller{
-        \begin{tcolorbox}[boxrule=0.25mm]
+        \begin{tcolorbox}[boxrule=0.25mm]300
             \begin{verbatim}
 FUNC compile():
     clear compiled_code
@@ -158,3 +158,125 @@ ENDFUNC
     \caption{Graphical editor main functions (pseudocode)}
     \label{fig:design/catCode-GUI-methods}
 \end{fullwidthfigure}
+
+\begin{fullwidthfigure}
+    \centering
+    \begin{subfigure}[t]{1\linewidth}
+        \begin{tcolorbox}[boxrule=0.25mm]
+        \subcaption{\textbf{Graphical editor} (\texttt{res://src/catCode/ui/basic\_graphical\_editor.gd})}
+        \smaller{
+        \begin{verbatim}
+func push_code():
+    clear_nodes()
+    print("> Pushing code...")
+    for i in range(0, len(draft_code)):
+        print("- " + str(i) + " " + str(draft_code[i]))
+        var this_logic_block :logic_block = draft_code[i].primary_block
+        var this_graphical_block :graphical_block = this_logic_block.ui_block.instantiate()
+        this_graphical_block.code_editor = self
+        instruction_nodes.append(this_graphical_block)
+        code_container.add_child(this_graphical_block)
+        this_graphical_block.bind_from_instruction(draft_code[i], i)
+        \end{verbatim}
+        }
+        \end{tcolorbox}
+    \end{subfigure}
+    \begin{subfigure}[t]{1\linewidth}
+        \begin{tcolorbox}[boxrule=0.25mm]
+        \subcaption{\textbf{Graphical block} (\texttt{res://src/catCode/graphicalBlocks/graphical\_block.gd})}
+        \smaller{
+        \begin{verbatim}
+func bind_from_instruction(instruction :instruction_line, _line_number :int = 0):
+    consituent_block = instruction.primary_block
+    indentifier = consituent_block.block_ref
+    params = instruction.parameters
+    indent = instruction.indent
+    line_number = _line_number
+    refresh_content()
+        \end{verbatim}
+        }
+        \textbf{\textit{\#} \texttt{refresh\_content()} \textit{in turn calls} \texttt{push\_params()}\textit{, alongside emitting the relevant signals for the UI.}}
+
+        \vspace{0.6cm}
+
+        \begin{verbatim}
+func push_params(will_emit_signal :bool = false):
+    for i in range(0, len(params)):
+        print("      " + str(parameter_nodes[i]))
+        parameter_nodes[i].set_param_value(params[i])
+    
+    refresh.emit()
+    if will_emit_signal: parameters_updated.emit(line_number, params)
+        \end{verbatim}
+        
+        \end{tcolorbox}
+    \end{subfigure}
+    \caption{Push code functions}
+    \label{fig:design/catCode-GUI-push}
+\end{fullwidthfigure}
+
+\begin{fullwidthfigure}
+    \centering
+    \begin{subfigure}[t]{1\linewidth}
+        \begin{tcolorbox}[boxrule=0.25mm]
+        \subcaption{\textbf{Graphical editor} (\texttt{res://src/catCode/ui/basic\_graphical\_editor.gd})}
+        \smaller{
+        \begin{verbatim}
+func pull_code():
+    clear_draft_code()
+    print("> Pulling code...")
+    for i in range(0, len(instruction_nodes)):
+        print("- " + str(i) + " " + str(instruction_nodes[i]))
+        draft_code.append(instruction_nodes[i].get_instruction_line())
+        \end{verbatim}
+        }
+        \end{tcolorbox}
+    \end{subfigure}
+    \begin{subfigure}[t]{1\linewidth}
+        \begin{tcolorbox}[boxrule=0.25mm]
+        \subcaption{\textbf{Graphical block} (\texttt{res://src/catCode/graphicalBlocks/graphical\_block.gd})}
+        \smaller{
+        \begin{verbatim}
+func get_instruction_line():
+    return instruction_line.new(indent, consituent_block, get_params())
+
+func get_params():
+    pull_params(false)
+    return params
+
+func pull_params(will_emit_signal :bool = false) -> Array:
+    params = []
+    for this_parameter_node in parameter_nodes:
+        params.append(this_parameter_node.get_param_value())
+    
+    if will_emit_signal: parameters_updated.emit(line_number, params)
+    return params
+        \end{verbatim}
+        }
+        \textbf{\textit{Each GraphicalComponent has a method} \texttt{get\_param\_value()} \textit{which returns a formatted list of parameters}}
+        \end{tcolorbox}
+    \end{subfigure}
+    \caption{Pull code functions}
+    \label{fig:design/catCode-GUI-pull}
+\end{fullwidthfigure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{C5//GraphicalCatCode/CatCodeGUI-communication-New-instructions.drawio.png}
+    \caption{Sequence diagram of updating an instruction set}
+    \label{fig:design/catCode-GUI-comms-1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{C5//GraphicalCatCode/CatCodeGUI-communication-compileCode.drawio.png}
+    \caption{Sequence diagram of compiling graphical CatCode}
+    \label{fig:design/catCode-GUI-comms-2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{C5//GraphicalCatCode/CatCodeGUI-communication-set-code.drawio.png}
+    \caption{Sequence diagram of setting compiled CatCode to a new value}
+    \label{fig:design/catCode-GUI-comms-3}
+\end{figure}
