@@ -79,8 +79,82 @@ Operand blocks are handled as components of their parent graphical block, simila
 
 \subsection{Building and Compiling}
 
-The graphical editor stores the code in a semi-compiled state (\texttt{draft\_code}) at all times as well as the most recent fully compiled code. \texttt{Draft\_code} will always contain up to date function blocks, and is updated whenever new blocks are added, but may not contain up to date parameters. It operates off two main methods: \texttt{push\_code()} and \texttt{pull\_code()}, pseudocode in \textbf{FIGURES}. Each \textit{graphicalBlock} also has a push and pull function which will either construct its parameters or convert them into compiled code (recursively when operators are involved). Every action can be reducing to pushing and pulling as shown in \textbf{FIGURE}.
+The graphical editor stores the code in a semi-compiled state (\texttt{draft\_code}) at all times as well as the most recent fully compiled code. \texttt{Draft\_code} will always contain up to date function blocks, and is updated whenever new blocks are added, but may not contain up to date parameters. It operates off two main methods: \texttt{push\_code()} and \texttt{pull\_code()}, pseudocode in \textbf{FIGURES}. Each \textit{graphicalBlock} also has a push and pull function which will either construct its parameters or convert them into compiled code (recursively when operators are involved). Every action can be reducing to pushing and pulling as shown in \autoref{fig:design/catCode-GUI-methods}.
 
 References to \textit{logicBlocks} are stored in two arrays (\texttt{operand\_list} and \texttt{function\_list}) rather than one, this is done to separate blocks that can only exist as parameters of other blocks from function blocks for use within menus. When the instruction set within \textit{CodeManager} it emits the signal \texttt{instructions\_updated}, which carries the new instruction set. The editor receives this and uses this to construct its own arrays.
 
 Compiled code is similarly passed back to to the \textit{CodeManager} through the use of signals, although it is expected that the \textit{CodeManager} calls the \texttt{compile()} function. The communication between nodes is shown in \textbf{FIGURE}.
+
+\begin{fullwidthfigure}
+    \centering
+    \begin{subfigure}[t]{0.45\linewidth}
+        \smaller{
+        \begin{tcolorbox}[boxrule=0.25mm]
+            \begin{verbatim}
+FUNC compile():
+    clear compiled_code
+    pull_code()
+    compiled_code ← draft_code()
+    emit code_recompiled(compiled_code)
+ENDFUNC
+
+
+
+
+
+            \end{verbatim}
+        \end{tcolorbox}
+        }
+        \subcaption{\texttt{compile()}}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\linewidth}
+        \smaller{
+        \begin{tcolorbox}[boxrule=0.25mm]
+            \begin{verbatim}
+FUNC add_line(func_list_ind):
+    previous_indent ← get_prev_ind()
+    new_line ← instruction_line.new(
+        prev_indent,
+        function_list[func_list_ind],
+        []
+    )
+    pull_code()
+    draft_code.append(new_line)
+    push_code()
+ENDFUNC
+            \end{verbatim}
+        \end{tcolorbox}
+        }
+        \subcaption{\texttt{add\_line()}}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\linewidth}
+        \smaller{
+        \begin{tcolorbox}[boxrule=0.25mm]
+            \begin{verbatim}
+FUNC set_code(new_code):
+    draft_code ← new_code
+    push_code
+ENDFUNC
+
+            \end{verbatim}
+        \end{tcolorbox}
+        }
+        \subcaption{\texttt{set\_code()}}
+    \end{subfigure}
+\begin{subfigure}[t]{0.45\linewidth}
+        \smaller{
+        \begin{tcolorbox}[boxrule=0.25mm]
+            \begin{verbatim}
+FUNC remove_line(line):
+    pull_code()
+    draft_code.remove_at(line)
+    push_code()
+ENDFUNC
+            \end{verbatim}
+        \end{tcolorbox}
+        }
+        \subcaption{\texttt{remove\_line()}}
+    \end{subfigure}    
+    \caption{Graphical editor main functions (pseudocode)}
+    \label{fig:design/catCode-GUI-methods}
+\end{fullwidthfigure}
