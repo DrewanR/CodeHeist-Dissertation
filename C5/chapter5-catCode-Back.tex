@@ -17,6 +17,7 @@ As shown in \autoref{fig:design/CatCodeBack/Overview}, there are multiple main c
 
 \begin{fullwidthtable}[]
     \centering
+    \small{
     \begin{tabular}{llp{10cm}}\toprule
         Node(s)	& Variable & Responsibilities \\\midrule
         <Entity> & \texttt{parent} & Executes movement functions such as \texttt{jump()}. \\
@@ -29,6 +30,7 @@ As shown in \autoref{fig:design/CatCodeBack/Overview}, there are multiple main c
         \textit{InstructionSource} & \texttt{instruction\_source} & The children of this node are used to compile the instruction set. By default, it will be the \textit{CodeManager}. \\
         \textit{LogicBlocks} & N/A & Stores both the metadata and methods for a block. \\ \bottomrule
     \end{tabular}
+    }
     \caption{CatCode components and their responsibilities}
     \label{tab:design/CatCode/ComponentResponsibilities}
 \end{fullwidthtable}
@@ -39,16 +41,33 @@ The \texttt{logic\_block} family of classes, sometimes semantically called \text
 
 \begin{fullwidthfigure}[h]
     \centering
-    \includegraphics[width=1\linewidth]{C5/CatCode/catCode-LogicalBlocks-ClassDiagram.png}
+    \includegraphics[width=0.9\linewidth]{C5/CatCode/catCode-LogicalBlocks-ClassDiagram.png}
     \caption{Partial class diagram of the LogicBlock family of classes}
     \label{fig:design/CatCode/LogicBlockClassDiagram}
 \end{fullwidthfigure}
 
 The \texttt{logicBlock} directory is separated into two folders: \texttt{nodes} and \texttt{scripts}, with the superclasses getting stored in \texttt{classes}, refer to \autoref{fig:catCodeSpec/files} to more detail on the locations. This was to aid with dragging and dropping nodes in the editor to add blocks to the instruction set as accidentally dropping a script file onto the \textit{CodeManager} rather than the node will override the \textit{CodeManager}'s script.
 
-Whilst many nodes have their own final script, this is not required as most of the metadata for each block is stored using \texttt{@export} variables (which can be set for each node in the editor). The purpose of each superclass is available in TAB. \autoref{app:supp} contains the \nameref{app:supp} which details each of the blocks in full.
+\pagebreak % Aesthetic page break
 
-\textbf{TODO: Once words available are known}
+Whilst many nodes have their own final script, this is not required as most of the metadata for each block is stored using \texttt{@export} variables (which can be set for each node in the editor). The purpose of each superclass is available in \autoref{tab:design/CatCode/superClassResponsibilities}. \autoref{app:supp} contains the \nameref{app:supp} which details each of the blocks in full.
+
+\begin{table}[H]
+    \centering
+    \small{
+    \begin{tabular}{lp{10cm}}\toprule
+        Superclass & Purpose \\\midrule
+        \texttt{logic\_block} & Superclass for all logic blocks \\
+        \texttt{function\_block} & Superclass for functions such as print or jump \\
+        \texttt{conditional\_block} & Superclass for blocks for selective blocks such as if \\
+        \texttt{boolean\_operator} & Superclass for the boolean statements \\
+        \texttt{iteration\_block} & Superclass for blocks denoting iteration
+        \\ \bottomrule
+    \end{tabular}
+    }
+    \caption{CatCode components and their responsibilities}
+    \label{tab:design/CatCode/superClassResponsibilities}
+\end{table}
 
 \subsection{Constructing the Instruction Set}
 
@@ -79,13 +98,6 @@ The \texttt{update\_instructions()} function does the following:
 
     \item Emits the signal \texttt{instructions\_updated(new\_list :Array[logic\_block], new\_dict :Dictionary[String, logic\_block])}, to allow any relevant nodes to receive this new instruction set.
 \end{enumerate}
-
-\subsection{Compiled CatCode}
-
-CatCode is compiled language. This is because, in many scenarios, a script is getting executed every frame meaning that execution speed is worth the cost in memory intensity. Because it is executed every frame, executions will greatly outnumber compilations. Also, relying on compiled CatCode for execution allowed the Code Editor to be swapped. It is the responsibility of the Code Editor to compile CatCode.
-
-Compiled CatCode consists of an array of \texttt{instruction\_line} class instances (full definition available in \autoref{fig:design/CatCodeBack/instructionLineFull}). Each element represents a single line storing -- through \texttt{instruction\_line} -- a line's indent, a reference to the line's \textit{LogicBlock}, and its parameters. For interpretation to work as intended, the final block must be a \textit{pass} block where it's \texttt{indent} is \texttt{0}.
-
 
 \begin{fullwidthfigure}
     \centering
@@ -165,12 +177,20 @@ func get_next_indent() -> int:
         \caption{Compiled code, stored in array \texttt{compiled\_code}}
     \end{subfigure}
     \caption{Compiled CatCode example}
-    \label{fig:placeholder}
+    \label{fig:compiledCodeExample}
 \end{fullwidthfigure}
+
+\subsection{Compiled CatCode}
+
+CatCode is compiled language. This is because, in many scenarios, a script is getting executed every frame meaning that execution speed is worth the cost in memory intensity. Because it is executed every frame, executions will greatly outnumber compilations. Also, relying on compiled CatCode for execution allowed the Code Editor to be swapped. It is the responsibility of the Code Editor to compile CatCode.
+
+\pagebreak % Aesthetic page break
+
+Compiled CatCode consists of an array of \texttt{instruction\_line} class instances (full definition available in \autoref{fig:design/CatCodeBack/instructionLineFull}). Each element represents a single line storing -- through \texttt{instruction\_line} -- a line's indent, a reference to the line's \textit{LogicBlock}, and its parameters. For interpretation to work as intended, the final block must be a \textit{pass} block where it's \texttt{indent} is \texttt{0}.
 
 \subsection{Interpreting Compiled Code}
 
-Compiled CatCode is interpreted sequentially by the runner (typically a \textit{CatThread}) using the \texttt{execute()} method in \texttt{cat\_thread.gd}. This is done by iterating across every index of the \texttt{compiled\_code}. The behaviour of this is modified by \texttt{indent\_stack}, a stack\footnote{Godot does not have a defined stack class. Instead, implements methods associated with stacks within the list data-type. However, for our algorithm this variable is always interacted with as a stack.} of \texttt{state\_stack\_layer} (class definition in \autoref{fig:design/catCode-stateStackLayer}), which manages structural elements such as \texttt{if} and \texttt{repeat}. The use of this stack allows for the interpretation of nested iteration, nested selection and any combination there of.
+Compiled CatCode (shown in \autoref{fig:compiledCodeExample}) is interpreted sequentially by the runner (typically a \textit{CatThread}) using the \texttt{execute()} method in \texttt{cat\_thread.gd}. This is done by iterating across every index of the \texttt{compiled\_code}. The behaviour of this is modified by \texttt{indent\_stack}, a stack\footnote{Godot does not have a defined stack class. Instead, implements methods associated with stacks within the list data-type. However, for our algorithm this variable is always interacted with as a stack.} of \texttt{state\_stack\_layer} (class definition in \autoref{fig:design/catCode-stateStackLayer}), which manages structural elements such as \texttt{if} and \texttt{repeat}. The use of this stack allows for the interpretation of nested iteration, nested selection and any combination there of.
 
 The indent stack is analogous to a call stack in many programming languages, where the top represents the current section of code. The most important element of this for sequential interpretation is \texttt{state} an enum that determines whether the current line of code should be executed (\texttt{PASS\_STATES.DO}) or skipped (\texttt{PASS\_STATES.SKIP} or \texttt{PASS\_STATES.SKIP\_ALL}).
 
@@ -234,9 +254,9 @@ In the evaluate state, the statement is evaluated. This is done the same way as 
 
 When the previous statement is false, it enters the \textquote{skip} state. This will skip all lines until the next statement in the current conditional structure. If this statement is an \texttt{else}, than it enters the \textquote{do} state, else it will return to the \textquote{evaluate} state for the next statement.
 
-There is no true \textquote{end} line, instead it will assume it is the end of a block when the indent of the next line is lower than the current stack it is not \texttt{elif} or \texttt{else}. If this is the case, the current top of the stack will be \textquote{popped} using the \texttt{pop\_back()} method. This is one of the cases where the \texttt{line\_number} is not incremented in case as this process needs to be repeated for every indent until the indent is once more where it is meant to be.
+There is no true \textquote{end if} line, instead it will assume it is the end of a block when the indent of the next line is lower than the current stack it is not \texttt{elif} or \texttt{else}. If this is the case, the current top of the stack will be \textquote{popped} using the \texttt{pop\_back()} method. This is one of the cases where the \texttt{line\_number} is not incremented in case as this process needs to be repeated for every indent until the indent is once more where it is meant to be.
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=0.75\linewidth]{C5/CatCode/selectionStateDiagram}
     \caption{Finite state machine for interpreting conditional structures}
@@ -249,11 +269,13 @@ Similar to selective statements, when a iterative statement is reached a new \te
 
 When the current line is the current iterative statement, it is evaluated using \texttt{line.primary\_block.evaluate([line.parameters[0], indent\_stack.back()])}. If it returns true, it remains in a \textquote{pass} state; else, it enters the \texttt{skip all} state.
 
+\pagebreak % Aesthetic page break
+
 When the end of the code section is reached (similar to conditional structures), if its in the pass state, the repetition count is increased and \texttt{line\_count} is set to the line of the current iterative statement; else, this structure will end similar to conditional structures. If the logic block for the statement returns \texttt{true} when \texttt{should\_wait\_for\_next\_frame()} is called, the runner will wait for the next frame before continuing.
 
 A state diagram is shown in \autoref{fig:design/CatCode-iterativeFSM}.
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=0.75\linewidth]{C5/CatCode/iterativeStateDiagram.png}
     \caption{Finite state machine for interpreting iterative structures}
